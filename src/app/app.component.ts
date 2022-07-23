@@ -6,13 +6,42 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+    {
+      title: 'Home',
+      url: '/home',
+      ionicIcon: 'home-outline',
+      color: 'red-icon'
+    },
+    {
+      title: 'Services & Policies',
+      url: '/services-policies',
+      ionicIcon: 'paw-outline',
+      color: 'orange-icon'
+    },
+    {
+      title: 'Enrollment',
+      url: '/enrollment',
+      ionicIcon: 'school-outline',
+      color: 'yellow-icon'
+    },
+    {
+      title: 'Reservations',
+      url: '/reservations',
+      ionicIcon: 'calendar-number-outline',
+      color: 'green-icon'
+    },
+    {
+      title: 'Gallery',
+      url: '/gallery',
+      ionicIcon: 'image-outline',
+      color: 'blue-icon'
+    },
+    {
+      title: 'Client Videos',
+      url: '/client-videos',
+      ionicIcon: 'videocam-outline',
+      color: 'purple-icon'
+    }
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor() {}
 }
