@@ -35,5 +35,43 @@
           and helps put the pet parents at ease. While you are away, give your pet the gift of Peace of My Heart!</p>
       </ion-col>
     </ion-row>
+    <ion-row class="home-list">
+      <ion-col class="home-item" size-xs="12" size-md="6">
+        <a class="home-anchor" [routerLink]="['/services-policies']">
+          <img class="responsive-image" src="../../assets/home/services-brownDogCorgi.jpg">
+          <h2 class="home-title services-category">Services &amp; Policies</h2>
+        </a>
+      </ion-col>
+      <ion-col class="home-item" size-xs="12" size-md="6">
+        <a class="home-anchor" [routerLink]="['/enrollment']">
+          <img class="responsive-image" src="../../assets/home/enrollment-beaglePuppy.jpg">
+          <h2 class="home-title enrollment-category">Enrollment</h2>
+        </a>
+      </ion-col>
+      <ion-col class="home-item" size="12">
+        <a class="home-anchor" [routerLink]="['/reservations']">
+          <img class="responsive-image" src="../../assets/home/reservations-whitePuppyRunning.jpg">
+          <h2 class="home-title reservations-category">Reservations</h2>
+        </a>
+      </ion-col>
+      <ion-col class="home-item" size="12">
+        <a class="home-anchor" [routerLink]="['/gallery']">
+          <img class="responsive-image" src="../../assets/home/gallery-cameraGuyDogPics.jpg">
+          <h2 class="home-title gallery-category">Gallery</h2>
+        </a>
+      </ion-col>
+      <ion-col class="home-item" size="12">
+        <a class="home-anchor" [routerLink]="['/client-videos']">
+          <div class="center-button">
+            <h2 class="home-title client-video-category">Client Videos</h2>
+            <!-- <button fill="clear" class="home-title">Client Videos</button> -->
+          </div>
+          <video width="100%" autoplay [muted]="true" poster="./assets/images/home/pexels-alena-darmel-9033464.jpg" loop>
+            <source src="../../assets/home/video/pexels-alena-darmel-9033464-shorter.mp4" type="video/mp4">
+          </video>
+        </a>
+      </ion-col>
+    </ion-row>
+    <app-footer></app-footer>
   </ion-grid>
 </ion-content>

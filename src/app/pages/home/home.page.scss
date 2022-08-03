@@ -4,8 +4,38 @@
 }
 
 .home-list {
-	background-color: black;
-	color: white;
+  background-color: black;
+	.home-item {
+		padding: 3px;
+		// img {
+		// 	width: 100%;
+		// 	height: 100%;
+		// 	object-fit: cover;
+		// }
+		.home-anchor {
+			height: 100%;
+			text-decoration: none;
+			display: flex;
+			justify-content: flex-start;
+			align-items: flex-start;
+			.home-title {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				color: var(--ion-color-light);
+				margin: auto;
+				text-transform: uppercase;
+				text-shadow: 1px 1px 1px black;
+				font-weight: 400;
+				font-size: 18px;
+				letter-spacing: 1px;
+				padding: .5rem;
+				border-radius: 5px;
+				z-index: 10;
+			}
+		}
+	}
 }
 
 .move-img-down {
@@ -18,4 +48,35 @@
 	justify-content: center;
 	width: 100%;
 	height: auto;
+}
+
+.center-button {
+	position:absolute; top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%); 
+	z-index:10;
+}
+
+.services-category {
+	background: #ff8c00;
+}
+
+.enrollment-category {
+	background: #ffed00;
+}
+
+.reservations-category {
+	background: #008026;
+}
+
+.gallery-category {
+	background: #004dff;
+}
+
+.client-video-category {
+	background: #750787;
+}
+
+.about-category {
+	background: #e40303;
 }
