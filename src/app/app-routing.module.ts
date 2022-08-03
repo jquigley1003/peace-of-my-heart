@@ -18,6 +18,22 @@ const routes: Routes = [
   {
     path: 'services-policies',
     loadChildren: () => import('./pages/services-policies/services-policies.module').then( m => m.ServicesPoliciesPageModule)
+  },
+  {
+    path: 'reservations',
+    loadChildren: () => import('./pages/reservations/reservations.module').then( m => m.ReservationsPageModule)
+  },
+  {
+    path: 'enrollment',
+    loadChildren: () => import('./pages/enrollment/enrollment.module').then( m => m.EnrollmentPageModule)
+  },
+  {
+    path: 'gallery',
+    loadChildren: () => import('./pages/gallery/gallery.module').then( m => m.GalleryPageModule)
+  },
+  {
+    path: 'pet-videos',
+    loadChildren: () => import('./pages/pet-videos/pet-videos.module').then( m => m.PetVideosPageModule)
   }
 ];
 

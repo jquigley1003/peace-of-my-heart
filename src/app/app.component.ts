@@ -37,8 +37,8 @@ export class AppComponent {
       color: 'blue-icon'
     },
     {
-      title: 'Client Videos',
-      url: '/client-videos',
+      title: 'Pet Videos',
+      url: '/pet-videos',
       ionicIcon: 'videocam-outline',
       color: 'purple-icon'
     }
