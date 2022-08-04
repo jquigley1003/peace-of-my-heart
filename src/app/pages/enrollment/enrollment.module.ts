@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { EnrollmentPageRoutingModule } from './enrollment-routing.module';
 
 import { EnrollmentPage } from './enrollment.page';
+import { FooterModule } from 'src/app/shared/components/footer/footer.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EnrollmentPageRoutingModule
+    EnrollmentPageRoutingModule,
+    FooterModule
   ],
   declarations: [EnrollmentPage]
 })

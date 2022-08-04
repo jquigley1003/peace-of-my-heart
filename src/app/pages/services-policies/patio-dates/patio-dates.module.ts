@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PetVideosPageRoutingModule } from './pet-videos-routing.module';
+import { PatioDatesPageRoutingModule } from './patio-dates-routing.module';
 
-import { PetVideosPage } from './pet-videos.page';
+import { PatioDatesPage } from './patio-dates.page';
 import { FooterModule } from 'src/app/shared/components/footer/footer.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { FooterModule } from 'src/app/shared/components/footer/footer.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    PetVideosPageRoutingModule,
+    PatioDatesPageRoutingModule,
     FooterModule
   ],
-  declarations: [PetVideosPage]
+  declarations: [PatioDatesPage]
 })
-export class PetVideosPageModule {}
+export class PatioDatesPageModule {}

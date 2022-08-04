@@ -1,0 +1,372 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img slot="start" [routerLink]="['/home']" class="home-button" src="../../../assets/shared/logo-white-75x75.png">
+    <ion-title>
+      In-Home Boarding
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button text="Services & Policies"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col class="responsive-image ion-no-margin" size="12">
+      <div class="header-img-container">
+        <img class="header-img" src="../../../../assets/services-policies/boarding.jpg">
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-margin">
+    <ion-col size="12" class="ion-padding">
+      <h1 class="ion-text-center">In-Home Boarding</h1>
+      <h3 class="ion-text-center">Maximum Occupancy is 15 Pets</h3>
+      <p>
+        Your pet will stay in a home environment located in the Edgewood neighborhood of 
+        Atlanta. The pet will have around the clock care as it is also the residence of 
+        the owner of Peace of My Heart (POMH). This is a unique alternative to that of a large 
+        boarding kennel in that POMH only caters to a small number of pets at a time (max 
+        occupancy is 15 pets). Think of it as a bed & breakfast inn for dogs. Your pet is 
+        treated like a guest and will eat, play, and relax in a home with the owner and his pets. 
+        POMH offers a large privately fenced back yard where all pets get lots of play! There is a 
+        separate smaller yard if your pet is not comfortable in a group play setting with 
+        several other dogs. Pets are crated for their own safety when there is no one here 
+        (never longer than 2 hours), during meals, and at night time.
+      </p>
+      <p>Before your pet leaves POMH, don't forget to pamper him or her with an exit bath! With this added 
+        service, your dog will enjoy a warm bath, clean ears, cut nails, and an external anal gland 
+        expression. Rates are based upon size and coat length (short hair or long hair). Examples of 
+        long coated breeds include : Irish Setter, Collie, Great Pyreness, Maltese, and any dog with 
+        similar length. Rates are listed below.
+      </p>
+      <p>
+        POMH has a very small staff, so we get to know your pet more personally. You can 
+        trust any special needs for your pet will be strictly adhered to.
+      </p>
+      <p>
+        Advance reservations are strongly recommended.<br>
+        Two days of DayCare at POMH are required prior to boarding.<br>
+        Two Forms required: <a>Boarding Form</a> and 
+        <a>Consent Form</a>. (Consent Form only required if you sign-up your pet for any 
+        additional services that are off-site)<br>
+        Please familiarize yourself with the Policies and Vaccination Requirements.<br>
+        Feel free to check availability: call, email, or 
+        <a href="https://calendar.yahoo.com/stephen_walters2003" target="_blank">take a look at our on-line calendar</a>.
+      </p>
+      <p>
+        While boarding, POMH offers additional services for your pet (rates are listed below).
+      </p>
+      <ul>
+        <li>
+          Individual Attention
+        </li>
+        <li>
+          Half Day or Full Day Field Trips<br>
+          <a [routerLink]="['/services-policies/field-trips']">(see Field Trip Service for more details)</a>
+        </li>
+        <li>
+          Patio Date<br>
+          <a [routerLink]="['/services-policies/patio-dates']">(see Patio Date service for more details)</a>
+        </li>
+        <li>
+          Exit bath - so your pet can return home freshly bathed.
+        </li>
+        <li>
+          Pet Transport<br>
+          <a [routerLink]="['/services-policies/pet-transport']">(see Pet Transport Service for more details and rates)</a>
+        </li>
+      </ul>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-margin">
+    <ion-col size="12" class="ion-padding ion-margin">
+      <h1 class="ion-text-center">Holiday In-Home Boarding</h1>
+      <p>
+        Holiday Boarding rates and a required length of stay apply during these holidays: 
+        Thanksgiving, Christmas, New Year's Day, Easter, Memorial Day, 4th of July, and 
+        Labor Day. Rates are listed below.
+      </p>
+      <p>
+        A minimum of three nights is required, to include one day/night prior to the Holiday 
+        and one day/night after the Holiday. This is a set rate, which includes up to five 
+        nights. So whether a 3, 4, or 5 night stay, the Holiday rate remains the same. 
+        If you wish to reserve more than five nights, the subsequent nights will be 
+        at the regular nightly rate. Discounts for a second or third pet from same household 
+        will apply.
+      </p>
+    </ion-col>
+  </ion-row>
+  <!-- BEGIN BOARDING RATES -->
+  <ion-row class="rate-format ion-margin">
+    <ion-col size="12" class="ion-padding">
+      <h2>Boarding Rates</h2>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center"> 
+          <p>$57.50</p><!-- rate.amount -->
+        </ion-col>
+        <ion-col size="8">
+          <p>per night for one pet</p><!-- rate.description -->
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$52.50</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>per night for additional pet from same home (up to 3)</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$47.50</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>per night for additional pet from same home (more than 3)</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <!-- END BOARDING RATES -->
+  <!-- BEGIN HOLIDAY BOARDING RATES -->
+  <ion-row class="rate-format ion-margin">
+    <ion-col size="12" class="ion-padding">
+      <h2>Holiday Boarding Rates</h2>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center"> 
+          <p>$375</p><!-- rate.amount -->
+        </ion-col>
+        <ion-col size="8">
+          <p>for one pet</p><!-- rate.description -->
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$360</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>for second pet from same household</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$345</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>for third pet from same household</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <!-- END BOARDING RATES -->
+  <!-- BEGIN ADDITIONAL FEES -->
+  <ion-row class="rate-format ion-margin">
+    <ion-col size="12" class="ion-padding">
+      <h2>Additional Fees</h2>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$23.50</p><!-- addon.amount -->
+        </ion-col>
+        <ion-col size="8">
+          <p>After Hours Fee (pickup scheduled 7 PM - 9 PM)</p><!-- addon.description -->
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$30</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>Appointment Late Fee</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$48</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>Holiday Fee (Memorial Day, Fourth of July, Labor Day)</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$4</p><!-- addon.amount -->
+        </ion-col>
+        <ion-col size="8">
+          <p>per day for POMH Food</p><!-- addon.description -->
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$2.25</p><!-- addon.amount -->
+        </ion-col>
+        <ion-col size="8">
+          <p>Fresh Baked Treats by Taj Ma-Hound</p><!-- addon.description -->
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$3.50</p><!-- addon.amount -->
+        </ion-col>
+        <ion-col size="8">
+          <p>Ice Cream Cups by Taj Ma-Hound</p><!-- addon.description -->
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <!-- END ADDITIONAL FEES -->
+  <!-- BEGIN ADDITIONAL SERVICES RATES -->
+  <ion-row class="rate-format ion-margin">
+    <ion-col size="12">
+      <h2>Additional Services</h2>
+    </ion-col>
+    <ion-col size="12">
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$20</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>Individual Attention</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$50</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>Half Day Field Trip includes bath</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$70</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>Full Day Field Trip includes bath</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$35</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>Patio Date</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <!-- END ADDITIONAL SERVICES RATES -->
+  <!-- BEGIN EXIT BATH SERVICES RATES -->
+  <ion-row class="rate-format ion-margin">
+    <ion-col size="12">
+      <h2>Exit Bath<br>
+        (includes bath, ears, nails, & external anal gland expression)</h2>
+      <!-- Can switch dog size information below with image of size chart -->
+      <ion-row>
+        <ion-col size-xs="12" size-md="3">
+          <h4>Small 10 lbs or less</h4>
+        </ion-col>
+        <ion-col size-xs="12" size-md="3">
+          <h4>Medium 11-30 lbs</h4>
+        </ion-col>
+        <ion-col size-xs="12" size-md="3">
+          <h4>Large 31-70 lbs</h4>
+        </ion-col>
+        <ion-col size-xs="12" size-md="3">
+          <h4>XLarge 71-100 lbs</h4>
+        </ion-col>
+        <ion-col size-xs="12" size-md="3" offset-md="4">
+          <h4>XXLarge 100+ lbs</h4>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col  size-xs="12" size-md="6" class="ion-padding">
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$51</p><!-- services.bath.amount -->
+        </ion-col>
+        <ion-col size="8">
+          <p>short hair - small</p><!-- services.bath.description -->
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$56</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>short hair - medium</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$61</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>short hair - large</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$66</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>short hair - Xlarge</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$71</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>short hair - XXlarge</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size-xs="12" size-md="6"class="ion-padding">
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$67</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>long hair - small</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$72</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>long hair - medium</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$77</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>long hair - large</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$82</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>long hair - Xlarge</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$87</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>long hair - XXlarge</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <!-- END EXIT BATH SERVICES RATES -->
+  <app-footer></app-footer>
+</ion-content>

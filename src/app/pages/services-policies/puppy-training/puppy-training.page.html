@@ -1,0 +1,114 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img slot="start" [routerLink]="['/home']" routerDirection="back" 
+    class="home-button" src="../../../assets/shared/logo-white-75x75.png">
+    <ion-title>
+      Puppy Training
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button text="Services & Policies"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col class="responsive-image ion-no-margin" size="12">
+      <div class="header-img-container">
+        <img class="header-img" src="../../../../assets/services-policies/puppy-training.jpg">
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-margin">
+    <ion-col size="12" class="ion-padding">
+      <h1 class="ion-text-center">Puppy Training/Socialization</h1>
+      <h3 class="ion-text-center">8 Weeks Old - 1 Year Old</h3>
+      <p>
+        At Peace of My Heart (POMH), your puppy will be trained and socialized in a home environment using short term/long 
+        term crating. This method is used to aid in potty training and being happy and relaxed 
+        in a crate. The puppy will stay with me for four weeks, and can come home for two 
+        weekends (recommended) during the four week period. If the puppy does come home during the four week 
+        period, it is recommended that the puppy be picked up and returned to his/her home by POMH
+        <a [routerLink]="['/services-policies/pet-transport']">(see Pet Transport Service for description and rates)</a> 
+        to aid in reducing separation anxiety.
+      </p>
+      <p>
+        The importance of starting your puppy's training at this age is to maximize the puppy's prime 
+        'imprinting' phase. The lessons and experiences a puppy has at this age will imprint the puppy 
+        for the rest of its life. So, the more positive experiences the puppy has, the better well-adjusted 
+        adult dog it will become.
+      </p>
+      <p>
+        The behaviors targeted during training are: crate training, 
+        potty training, bite-inhibition, leash walking, recall, proper socialization and 
+        handle-ability. Other experiences your puppy will have while in training are exposure 
+        to other dogs (safe, well behaved and fully vaccinated), visits to restaurants and coffee shops 
+        (where allowed), bathing and nails weekly, and field trips to aid in a wide variety of 
+        experiences outside of the home. 
+      </p>
+      <p>
+        A puppy enrolled in the program will receive the following:
+      </p>
+      <ul>
+        <li>
+          Training treats
+        </li>
+        <li>
+          Occupational therapy treats during crate training
+        </li>
+        <li>
+          One bath per week
+        </li>
+        <li>
+          Option for Pet Transport Service to and from your home for weekend visits (extra rates apply)
+        </li>
+        <li>
+          Off-site training exercises and excursions
+        </li>
+        <li>
+          Four 1-hour follow-up training sessions (with the owner) after the 
+          puppy completes the four week in-home training. 
+        </li>
+      </ul>
+      <p>
+        The follow-up training sessions are your responsibility to schedule and must be scheduled within 
+        four weeks of completing this puppy training/socialization course. You will also receive a training 
+        journal at the completion of the four week training course. This will aid you and your puppy in your 
+        continued training efforts.
+      </p>
+      <!-- <p>
+        POMH has a <a href="https://www.youtube.com/channel/UCuTym_pXB_ZP8Zh4PcniHLg/videos"
+        target="_blank">dedicated channel on YouTube</a> so you can log in and watch your puppy’s 
+        training!
+      </p> -->
+      <p>
+        Advance reservations are strongly recommended.<br>
+        Two Forms required: <a>Puppy Training & Socialization Form</a> 
+        and <a>Consent Form</a>.<br>
+        Please familiarize yourself with the Policies and Vaccination Requirements.<br>
+        Feel free to check availability: call, email, or
+        <a href="https://calendar.yahoo.com/stephen_walters2003" target="_blank"> take a look at our on-line calendar</a>.
+      </p>
+    </ion-col>
+  </ion-row>
+  <!-- BEGIN PUPPY TRAINING RATES -->
+  <ion-row class="rate-format ion-margin ion-no-padding">
+    <ion-col size="12" class="ion-text-center">
+      <h2>Puppy Training/Socialization Rates</h2>
+    </ion-col>
+    <ion-col>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$820</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>per week (4 week minimum)</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <!-- END PUPPY TRAINING RATES -->
+  <app-footer></app-footer>
+</ion-content>

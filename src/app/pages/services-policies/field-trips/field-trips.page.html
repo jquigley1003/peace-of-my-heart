@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img slot="start" [routerLink]="['/home']" routerDirection="back" 
+    class="home-button" src="../../../assets/shared/logo-white-75x75.png">
+    <ion-title>
+      Field Trips
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button text="Services & Policies"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col class="responsive-image ion-no-margin" size="12">
+      <div class="header-img-container">
+        <img class="header-img" src="../../../../assets/services-policies/field-trips.jpg">
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-margin">
+    <ion-col size="12" class="ion-padding ion-margin">
+      <h1 class="ion-text-center">Field Trips</h1>
+      <h3 class="ion-text-center">Half Day and Full Day Rates</h3>
+      <p>
+        Peace of my Heart (POMH) offers two types of field trips: Half Day (up to 3 hrs) and 
+        Full Day (up to 6 hrs). These field trips are unique in that your pet will go on 
+        excursions away from POMH. Some include swimming opportunities or meeting different 
+        species of animals. Some of the destinations are: Atlanta Beltline, hiking at WD Thomson 
+        Park, privately owned property on Lake Hartwell, Desperate Dogs and The Pet Lodge. 
+      </p>
+      <p>
+        Field Trips for Boarding or DayCare pets must be requested on reservation form. Dogs 
+        that are not here for Boarding or DayCare can attend, but reservations must be made via 
+        the Field Trip Reservation Form. Since the destinations vary, the behavioral requirements 
+        are different according to destination.
+      </p>
+      <p>You may also request to be included in a group email which advises clients on scheduled 
+        upcoming field trips.</p>
+      <p>
+        Two Forms required: <a>Field Trip Form</a> and 
+        <a>Consent Form</a>.<br>
+        Field Trips are subject to availability.<br>
+        Feel free to check availability: call, email, or 
+        <a href="https://calendar.yahoo.com/stephen_walters2003" target="_blank">take a look at our on-line calendar</a>.
+      </p>
+    </ion-col>
+  </ion-row>
+  <!-- BEGIN FIELD TRIP SERVICE RATES -->
+  <ion-row class="rate-format ion-margin">
+    <ion-col size="12" class="ion-padding">
+      <h2>Field Trip Rates</h2>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$50</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>Half Day Field Trip includes bath</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$70</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>Full Day Field Trip includes bath</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <!-- END FIELD TRIP SERVICE RATES -->
+  <app-footer></app-footer>
+</ion-content>

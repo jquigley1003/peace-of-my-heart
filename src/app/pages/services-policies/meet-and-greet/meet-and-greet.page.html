@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img slot="start" [routerLink]="['/home']" routerDirection="back" 
+    class="home-button" src="../../../assets/shared/logo-white-75x75.png">
+    <ion-title>
+      Meet and Greet
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button text="Services & Policies"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col class="responsive-image ion-no-margin" size="12">
+      <div class="header-img-container">
+        <img class="header-img" src="../../../../assets/services-policies/meet-greet.jpg">
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-margin">
+    <ion-col size="12" class="ion-padding ion-margin">
+      <h1 class="ion-text-center">Meet and Greet</h1>
+      <h3 class="ion-text-center">One Hour Meeting to Tour POMH</h3>
+      <p>
+        This is a one hour meeting for you and your pet to come and tour Peace of My Heart 
+        (POMH). We encourage you to bring your pet so that they are familiar when they return 
+        to the property. At this visit, your pet will not meet other dogs and will not be subjected 
+        to any type of testing. The fee for this visit will be applied as a rebate on the 
+        invoice of your pet's first DayCare visit.
+      </p>
+    </ion-col>
+  </ion-row>
+  <!-- BEGIN PATIO DATE SERVICE RATES -->
+  <ion-row class="rate-format ion-margin">
+    <ion-col size="12" class="ion-padding">
+      <h2>Meet and Greet Rate</h2>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>One Hour Meeting at POMH (Cost Determined at Time of Appointment)</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <!-- END PATIO DATE SERVIC RATES -->
+  <app-footer></app-footer>
+</ion-content>

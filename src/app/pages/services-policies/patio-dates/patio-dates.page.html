@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img slot="start" [routerLink]="['/home']" routerDirection="back" 
+    class="home-button" src="../../../assets/shared/logo-white-75x75.png">
+    <ion-title>
+      Patio Dates
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button text="Services & Policies"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col class="responsive-image ion-no-margin" size="12">
+      <div class="header-img-container">
+        <img class="header-img" src="../../../../assets/services-policies/patio-dates.jpg">
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-margin">
+    <ion-col size="12" class="ion-padding ion-margin">
+      <h1 class="ion-text-center">Patio Dates</h1>
+      <h3 class="ion-text-center">Boarding and DayCare Pets Only</h3>
+      <p>
+        A Peace of My Heart (POMH) staff member will take your pet on a date to a local 
+        restaurant or coffee shop. These dates offer a unique special outing where they 
+        are pampered and enjoy the attention from other patrons and in some cases pets. 
+        Patio Dates must be requested on reservation form. There are some behavioral 
+        requirements for your pet to be permitted to go on these dates. 
+      </p>
+      <p>
+        Two Forms required: <a>Boarding Form</a> or <a>DayCare Form</a> and 
+        <a>Consent Form</a>.<br>
+        Patio Dates are subject to availability.
+      </p>
+    </ion-col>
+  </ion-row>
+  <!-- BEGIN PATIO DATE SERVICE RATES -->
+  <ion-row class="rate-format ion-margin">
+    <ion-col size="12" class="ion-padding">
+      <h2>Patio Date Rates</h2>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$35</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>Patio Date - (Boarding or DayCare pets only)</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <!-- END PATIO DATE SERVIC RATES -->
+  <app-footer></app-footer>
+</ion-content>

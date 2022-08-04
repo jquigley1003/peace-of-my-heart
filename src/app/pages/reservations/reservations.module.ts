@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ReservationsPageRoutingModule } from './reservations-routing.module';
 
 import { ReservationsPage } from './reservations.page';
+import { FooterModule } from 'src/app/shared/components/footer/footer.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ReservationsPageRoutingModule
+    ReservationsPageRoutingModule,
+    FooterModule
   ],
   declarations: [ReservationsPage]
 })

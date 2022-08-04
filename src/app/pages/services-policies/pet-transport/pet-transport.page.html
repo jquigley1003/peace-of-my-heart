@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img slot="start" [routerLink]="['/home']" routerDirection="back" 
+    class="home-button" src="../../../assets/shared/logo-white-75x75.png">
+    <ion-title>
+      Pet Transport
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button text="Services & Policies"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col class="responsive-image ion-no-margin" size="12">
+      <div class="header-img-container">
+        <img class="header-img" src="../../../../assets/services-policies/transportVanNew.jpg">
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-margin">
+    <ion-col size="12" class="ion-padding">
+      <h1 class="ion-text-center">Pick-up / Return Pet Transport Service</h1>
+      <h3 class="ion-text-center">Rates Based on Distance from 30317</h3>
+      <p>
+        Your pet can be picked up and returned to your home for any of the services 
+        Peace of My Heart (POMH) offers. POMH will also transport your pet for services 
+        offered by other providers; grooming, veterinarian visits, airport, training when 
+        they are at POMH for any of the services we offer.
+      </p>
+      <p>
+        Scheduling is required.<br>
+        Two Forms required: <a>Pet Transport Form</a> and 
+        <a>Consent Form</a>.<br>
+        Rates are based on distance from zip code 30317. The Pet Transport service is round trip.
+      </p>
+    </ion-col>
+  </ion-row>
+  <!-- BEGIN PICKUP/RETURN SERVICES RATES -->
+  <ion-row class="rate-format ion-margin">
+    <ion-col size="12" class="ion-padding">
+      <h2>Pick-up / Return Pet Transport Service Rates</h2>
+      <h4>*rates based on distance from Atlanta 30317</h4>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$46.50</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>for 0-15 miles</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$51.50</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>for 16-25 miles</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$56.50</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>for 26-30 miles</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$61.50</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>for 31-35 miles</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$66.50</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>for 36-40 miles</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$71.50</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>for 41-45 miles</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$25</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>for each 1-5 mile increase after 45 miles</p>
+        </ion-col>
+      </ion-row>
+      <h2>Additional Transport Fees</h2>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$23.50</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>After Hours Fee (return scheduled 7 PM - 9 PM)</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$25</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>Rush Hour Fee (7 AM - 9 AM and 4 PM - 6 PM)</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <p>$48</p>
+        </ion-col>
+        <ion-col size="8">
+          <p>Holiday Fee (Memorial Day, Fourth of July, Labor Day)</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <!-- END PICKUP/RETURN SERVICES RATES -->
+  <app-footer></app-footer>
+</ion-content>

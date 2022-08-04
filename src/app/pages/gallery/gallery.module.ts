@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { GalleryPageRoutingModule } from './gallery-routing.module';
 
 import { GalleryPage } from './gallery.page';
+import { FooterModule } from 'src/app/shared/components/footer/footer.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GalleryPageRoutingModule
+    GalleryPageRoutingModule,
+    FooterModule
   ],
   declarations: [GalleryPage]
 })
