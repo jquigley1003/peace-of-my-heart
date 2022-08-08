@@ -1,0 +1,85 @@
+<!-- page header -->
+<ion-header collapse="fade" mode="ios">
+  <ion-toolbar>
+    <ion-title>
+      <span>New Client Registration</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="content-container">
+    <!-- content title -->
+    <h2>Sign up</h2>
+
+    <!-- plan description -->
+    <ion-text class="plan-description">
+      <p>Peace of My Heart New Client</p>
+    </ion-text>
+
+    <!-- form -->
+    <form [formGroup]="registerForm" (ngSubmit)="onRegisterForm()" (keyup.enter)="onRegisterForm()">
+      <div class="form-container">
+        <!-- name -->
+        <ion-item>
+          <ion-label position="floating">First Name</ion-label>
+          <ion-input type="text" formControlName="firstName" required="true"></ion-input>
+        </ion-item>
+        <div *ngIf="(firstName.dirty || firstName.touched) && firstName.errors" class="errors">
+          <span *ngIf="firstName.errors?.required">First Name is required</span>
+        </div>
+        <ion-item>
+          <ion-label position="floating">Last Name</ion-label>
+          <ion-input type="text" formControlName="lastName" required="true"></ion-input>
+        </ion-item>
+        <div *ngIf="(lastName.dirty || lastName.touched) && lastName.errors" class="errors">
+          <span *ngIf="lastName.errors?.required">Last Name is required</span>
+        </div>
+        <!-- email -->
+        <ion-item class="ion-no-padding" lines="none" mode="ios">
+          <ion-label position="stacked">Email address <span class="accent">*</span>
+          </ion-label>
+          <ion-input
+            placeholder="james@gmail.com"
+            type="email"
+            inputmode="email"
+            required="true">
+          </ion-input>
+        </ion-item>
+  
+        <!-- password -->
+        <ion-item class="ion-no-padding" lines="none" mode="ios">
+          <ion-label position="stacked">Password <span class="accent">*</span>
+            </ion-label>
+          <ion-input
+            placeholder="password"
+            type="password"
+            minLength="8"
+            required="true">
+          </ion-input>
+        </ion-item>
+        <ion-text class="field-description">Min. 8 characters</ion-text>
+      </div>
+      <!-- terms and conditions -->
+      <div class="terms-container">
+        <ion-checkbox mode="ios"></ion-checkbox>
+        <ion-text>
+          I agree with the
+          <a href="https://ionicblocks.com/" target="_blank">
+            <span class="link">terms and conditions</span></a>
+          and
+          <a href="https://ionicblocks.com/" target="_blank">
+            <span class="link">privacy policy</span></a>
+          of the website and I accept them.
+        </ion-text>
+      </div>
+  
+      <!-- cta -->
+      <ion-button fill="solid" size="block" class="signup-button" mode="ios">
+        Sign up
+      </ion-button>
+    </form>
+    
+  </div>
+</ion-content>
+
