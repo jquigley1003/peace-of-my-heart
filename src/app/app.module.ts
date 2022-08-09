@@ -13,6 +13,8 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideFunctions,getFunctions } from '@angular/fire/functions';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { RegisterModalModule } from './shared/components/register-modal/register-modal.module';
+import { SignInModalModule } from './shared/components/sign-in-modal/sign-in-modal.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +32,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    RegisterModalModule,
+    SignInModalModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

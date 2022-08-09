@@ -17,6 +17,7 @@ export class RegisterModalComponent implements OnInit {
   registerForm: FormGroup;
   passwordType = 'password';
   passwordShow = false;
+  termsChecked = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -57,11 +58,13 @@ export class RegisterModalComponent implements OnInit {
     const lastName = this.registerForm.value.lastName.trim();
     const email = this.registerForm.value.email.trim();
     const password = this.registerForm.value.password.trim();
+    const acceptTOS = this.termsChecked;
     const data = {
       email,
       password,
       firstName,
-      lastName
+      lastName,
+      acceptTOS
     };
 
     await this.loadingService.presentLoading(
@@ -70,15 +73,26 @@ export class RegisterModalComponent implements OnInit {
     await this.authService.register(data)
     .then(async () => {
       this.loadingService.dismissLoading();
-      await this.router.navigate(['/intro']);
+      await this.router.navigate(['/home']);
     }, async err => {
       this.loadingService.dismissLoading();
       await this.alertService.presentAlert(
         'Registering Did Not Complete','please try again', err.message, ['OK']
       );
     });
+    console.log('Form data: ', data);
     this.registerForm.reset();
     await this.modalCtrl.dismiss();
+  }
+
+  onCheckEvent(event){
+    if(event.detail.checked) {
+      this.termsChecked = true;
+      console.log(`Terms Checked: `, this.termsChecked);
+    } else if (!event.detail.checked) {
+      this.termsChecked = false;
+      console.log(`Terms Checked: `, this.termsChecked);
+    }
   }
 
   togglePassword() {

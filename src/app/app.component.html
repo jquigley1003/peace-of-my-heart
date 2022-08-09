@@ -27,6 +27,32 @@
           </ion-item>
         </ion-menu-toggle>
       </ion-list>
+      <ion-list id="inbox-list">
+        <ion-list-header><h4>Access</h4></ion-list-header>
+        <ion-menu-toggle auto-hide="true">
+          <ion-item *ngIf="!currentUser" lines="none" detail="false">
+            <ion-icon class="icon-white" slot="start" name="person-add-outline"></ion-icon>
+            <ion-button (click)="presentRegisterModal()">Register as New Client</ion-button>
+          </ion-item>
+          <ion-item *ngIf="!currentUser" lines="none" detail="false">
+            <ion-icon class="icon-white" slot="start" name="log-in-outline"></ion-icon>
+            <ion-button (click)="presentSignInModal()">Sign In</ion-button>
+          </ion-item>
+          <!-- <ion-item *ngIf="!currentUser" lines="none" detail="false">
+            <ion-icon slot="start" name="person-add-outline"></ion-icon>
+            <ion-button (click)="presentResetPassword()">Forgot Password</ion-button>
+          </ion-item> -->
+          <ion-item *ngIf="currentUser" lines="none" detail="false">
+            <ion-icon class="icon-white" slot="start" name="log-out-outline"></ion-icon>
+            <ion-button (click)="signOut()">Sign Out</ion-button>
+          </ion-item>
+          <ion-item *ngIf="isAdmin" lines="none" detail="false" 
+          routerDirection="root" [routerLink]="['/admin']" routerLinkActive="selected">
+            <ion-icon class="icon-white" slot="start" name="business-outline"></ion-icon>
+            <ion-button>Admin Dashboard</ion-button>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="main-content"></ion-router-outlet>

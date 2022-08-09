@@ -21,15 +21,17 @@
     <form [formGroup]="registerForm" (ngSubmit)="onRegisterForm()" (keyup.enter)="onRegisterForm()">
       <div class="form-container">
         <!-- name -->
-        <ion-item>
-          <ion-label position="floating">First Name</ion-label>
+        <ion-item class="ion-no-padding" lines="none" mode="ios">
+          <ion-label position="stacked">First Name <span class="accent">*</span>
+          </ion-label>
           <ion-input type="text" formControlName="firstName" required="true"></ion-input>
         </ion-item>
         <div *ngIf="(firstName.dirty || firstName.touched) && firstName.errors" class="errors">
           <span *ngIf="firstName.errors?.required">First Name is required</span>
         </div>
-        <ion-item>
-          <ion-label position="floating">Last Name</ion-label>
+        <ion-item class="ion-no-padding" lines="none" mode="ios">
+          <ion-label position="stacked">Last Name <span class="accent">*</span>
+          </ion-label>
           <ion-input type="text" formControlName="lastName" required="true"></ion-input>
         </ion-item>
         <div *ngIf="(lastName.dirty || lastName.touched) && lastName.errors" class="errors">
@@ -40,29 +42,39 @@
           <ion-label position="stacked">Email address <span class="accent">*</span>
           </ion-label>
           <ion-input
-            placeholder="james@gmail.com"
+            formControlName="email"
+            placeholder="your_email@gmail.com"
             type="email"
             inputmode="email"
             required="true">
           </ion-input>
         </ion-item>
-  
+        <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+          <span *ngIf="email.errors?.required">Email is required</span>
+          <span *ngIf="email.errors?.pattern">Valid email format required (use lowercase)</span>
+        </div>
         <!-- password -->
         <ion-item class="ion-no-padding" lines="none" mode="ios">
           <ion-label position="stacked">Password <span class="accent">*</span>
-            </ion-label>
+          </ion-label>
           <ion-input
+            formControlName="password" 
             placeholder="password"
-            type="password"
+            [type]="passwordType"
             minLength="8"
             required="true">
           </ion-input>
         </ion-item>
+        <ion-icon name="eye" [color]="passwordShow === true ? 'secondary' : 'primary'"
+        slot="end" (click)="togglePassword()"></ion-icon>
+        <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+          <span *ngIf="password.errors?.required">Password is required</span>
+        </div>
         <ion-text class="field-description">Min. 8 characters</ion-text>
       </div>
       <!-- terms and conditions -->
       <div class="terms-container">
-        <ion-checkbox mode="ios"></ion-checkbox>
+        <ion-checkbox (ionChange)="onCheckEvent($event)" mode="ios"></ion-checkbox>
         <ion-text>
           I agree with the
           <a href="https://ionicblocks.com/" target="_blank">
@@ -75,11 +87,12 @@
       </div>
   
       <!-- cta -->
-      <ion-button fill="solid" size="block" class="signup-button" mode="ios">
-        Sign up
-      </ion-button>
+      <ion-button *ngIf="termsChecked" fill="solid" size="block" class="signup-button" mode="ios" type="submit" 
+      [disabled]="!registerForm.valid">Sign Up</ion-button>
+      <div class="ion-text-center">
+        <ion-button size="default" fill="clear" fill="solid" color="secondary" (click)="closeModal()">Cancel</ion-button>
+      </div>
     </form>
-    
   </div>
 </ion-content>
 

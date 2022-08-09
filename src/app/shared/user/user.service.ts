@@ -46,7 +46,11 @@ export class UserService implements OnDestroy {
     this.fetchUsers$ = collectionData(userRef, {idField: 'id'}) as Observable<User[]>;
   }
 
-  createUserData(uid: string, email: string, firstName: string, lastName: string) {
+  getAllUsers() {
+    return this.allUsers$.asObservable();
+  }
+
+  createUserData(uid: string, email: string, firstName: string, lastName: string, acceptTOS: boolean) {
     const data: User = {
       uid,
       email,
@@ -64,12 +68,87 @@ export class UserService implements OnDestroy {
       roles: {
         admin: false,
         active: false
-      }
+      },
+      acceptTOS
     };
 
     const usersRef = doc(this.afStore, 'users', uid);
     return setDoc(usersRef, data);
     // NOTE: cloud function will automatically set the custom user claims (admin: false)
+  }
+
+  async makeUserAdmin(user: User) {
+    const functions = getFunctions();
+    await this.loadingService.presentLoading(
+      '...please wait as we make this user an admin',
+      'bubbles',
+    10000,
+    );
+    httpsCallable(functions, 'addAdmin')(user)
+      .then(async (resp: any) => {
+        const data = await resp.data;
+        console.log('Response from httpsCallable addAdmin: ', data);
+        if(data.result) {
+          this.msg = data.result;
+        } else {
+          this.msg = data.error;
+        }
+        this.loadingService.dismissLoading();
+        this.toastService.presentToast(
+          this.msg,
+          'middle',
+          [{
+            text: 'OK',
+            role: 'cancel',
+          }], 5000);
+      })
+      .catch(err => {
+        this.loadingService.dismissLoading();
+        this.toastService.presentToast(
+          err.error,
+          'middle',
+          [{
+            text: 'OK',
+            role: 'cancel',
+          }], 5000);
+      });
+  }
+
+  async removeAdminRole(user: User) {
+    const functions = getFunctions();
+    await this.loadingService.presentLoading(
+      '...please wait as we remove this user as admin',
+      'bubbles',
+    10000,
+    );
+    httpsCallable(functions, 'removeAdmin')(user)
+      .then(async (resp: any) => {
+        const data = await resp.data;
+        console.log('Response from httpsCallable removeAdmin: ', data);
+        if(data.result) {
+          this.msg = data.result;
+        } else {
+          this.msg = data.error;
+        }
+        this.loadingService.dismissLoading();
+        this.toastService.presentToast(
+          this.msg,
+          'middle',
+          [{
+            text: 'OK',
+            role: 'cancel',
+          }], 5000);
+      })
+      .catch((err) => {
+        this.loadingService.dismissLoading();
+        this.toastService.presentToast(
+          err.error,
+          'middle',
+          [{
+            text: 'OK',
+            role: 'cancel',
+          }], 5000);
+      });
   }
 
   async deleteUser(userId) {
