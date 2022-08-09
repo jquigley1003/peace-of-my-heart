@@ -55,7 +55,7 @@
         </div>
         <!-- password -->
         <ion-item class="ion-no-padding" lines="none" mode="ios">
-          <ion-label position="stacked">Password <span class="accent">*</span>
+          <ion-label position="stacked">Password (Min. 8 characters) <span class="accent">*</span>
           </ion-label>
           <ion-input
             formControlName="password" 
@@ -65,12 +65,14 @@
             required="true">
           </ion-input>
         </ion-item>
-        <ion-icon name="eye" [color]="passwordShow === true ? 'secondary' : 'primary'"
-        slot="end" (click)="togglePassword()"></ion-icon>
+        <div style="display:flex; align-items: center;">
+          <ion-icon name="eye" [color]="passwordShow === true ? 'secondary' : 'primary'"
+           (click)="togglePassword()"></ion-icon>
+          <ion-text class="field-description">&nbsp; Show/Hide Password</ion-text>
+        </div>
         <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
           <span *ngIf="password.errors?.required">Password is required</span>
         </div>
-        <ion-text class="field-description">Min. 8 characters</ion-text>
       </div>
       <!-- terms and conditions -->
       <div class="terms-container">

@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { SignInModalComponent } from './sign-in-modal.component';
+import { ResetPasswordModalModule } from '../reset-password-modal/reset-password-modal.module';
 
 @NgModule({
   declarations: [SignInModalComponent],
@@ -12,7 +13,8 @@ import { SignInModalComponent } from './sign-in-modal.component';
     CommonModule,
     IonicModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ResetPasswordModalModule
   ]
 })
 export class SignInModalModule { }
