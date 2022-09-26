@@ -12,10 +12,7 @@ export class ReservationsPage implements OnInit {
   showVet = true;
   showPet = true;
   vaccinesFiled: boolean;
-  spayNeuter1: boolean;
-  rabiesType1: string;
-  dhppType1: string;
-  fleaControl1: boolean;
+
 
   constructor(
     private formBuilder: FormBuilder
@@ -35,19 +32,25 @@ export class ReservationsPage implements OnInit {
       emergencyPhone1: ['', (Validators.required, Validators.pattern('^((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$'))],
       emergencyName2: [''],
       emergencyPhone2: ['', Validators.pattern('^((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$')],
-      vetName1: ['', Validators.required],
-      vetPhone1: ['', Validators.required],
-      vetEmail1: [''],
-      petName1: ['', Validators.required],
-      petBreed1: ['', Validators.required],
-      petSex1: ['', Validators.required],
-      petDob1: ['', Validators.required],
-      petWeight1: ['', Validators.required],
-      petHair1: ['', Validators.required],
-      petSpayNeuter1: ['', Validators.required],
-      rabiesDate1: [''],
-      dhppDate1: [''],
-      bordetellaDate1: ['']
+      vetName: ['', Validators.required],
+      vetPhone: ['', Validators.required],
+      vetEmail: [''],
+      vetVaccinesFiled: [''],
+      pet1Name: ['', Validators.required],
+      pet1Breed: ['', Validators.required],
+      pet1Sex: ['', Validators.required],
+      pet1Dob: ['', Validators.required],
+      pet1Weight: ['', Validators.required],
+      pet1Hair: ['', Validators.required],
+      pet1SpayNeuter: ['', Validators.required],
+      pet1RabiesDate: [''],
+      pet1RabiesType: ['1 year'],
+      pet1DhppDate: [''],
+      pet1DhppType: ['1 year'],
+      pet1BordetellaDate: [''],
+      pet1FleaControl: [''],
+      pet1Food: ['true', Validators.required],
+      pet1Meds: ['false']
     });
    }
 
@@ -99,43 +102,44 @@ export class ReservationsPage implements OnInit {
     return this.boardingResForm.get('emergencyPhone2');
   }
 
-  get petName1() {
-    return this.boardingResForm.get('petName1');
+  get vetName() {
+    return this.boardingResForm.get('vetName');
   }
 
-  get petBreed1() {
-    return this.boardingResForm.get('petBreed1');
+  get vetPhone() {
+    return this.boardingResForm.get('vetPhone');
   }
 
-  get petSex1() {
-    return this.boardingResForm.get('petSex1');
+  get pet1Name() {
+    return this.boardingResForm.get('pet1Name');
   }
 
-  get petDob1() {
-    return this.boardingResForm.get('petDob1');
+  get pet1Breed() {
+    return this.boardingResForm.get('pet1Breed');
   }
 
-  get petWeight1() {
-    return this.boardingResForm.get('petDob1');
+  get pet1Sex() {
+    return this.boardingResForm.get('pet1Sex');
   }
 
-  get vetName1() {
-    return this.boardingResForm.get('vetName1');
+  get pet1SpayNeuter() {
+    return this.boardingResForm.get('pet1SpayNeuter');
   }
 
-  get vetPhone1() {
-    return this.boardingResForm.get('vetPhone1');
+  get pet1Dob() {
+    return this.boardingResForm.get('pet1Dob');
+  }
+
+  get pet1Weight() {
+    return this.boardingResForm.get('pet1Weight');
+  }
+
+  get pet1Food() {
+    return this.boardingResForm.get('pet1Food');
   }
 
   ngOnInit() {
-    this.rabiesType1 = '1 year';
-    this.dhppType1 = '1 year';
-    this.fleaControl1 = true;
-  }
-
-  ionViewWillLoad() {
     this.vaccinesFiled = true;
-    this.spayNeuter1 = true;
   }
 
   toggleShowClientInfo() {
@@ -163,32 +167,48 @@ export class ReservationsPage implements OnInit {
        return (key === 8 || key === 9 || key === 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
   }
 
-  vaccinesFiledSelect(event) {
+  selectVaccinesFiled(event) {
     this.vaccinesFiled = (event.detail.checked === true) ? true : false;
     console.log('vaccines are on file: ', this.vaccinesFiled);
+    const testVaccinesFiled = this.boardingResForm.value.vetVaccinesFiled;
+    console.log('Getting value from form: ', testVaccinesFiled);
   }
 
-  spayNeuterSelect(event) {
-    this.spayNeuter1 = (event.detail.checked === true) ? true : false;
-    console.log('this pet 1 is spayed or neutered: ', this.spayNeuter1);
-    const testPetSpayNeuter1 = this.boardingResForm.value.petSpayNeuter1;
-    console.log('Getting value from form: ', testPetSpayNeuter1);
+  selectSex(event) {
+    const testPet1Sex = this.boardingResForm.value.pet1Sex;
+    console.log('Getting sex from form: ', testPet1Sex);
+  }
+
+  selectSpayedNeutered(event) {
+    const testPet1SpayNeuter = this.boardingResForm.value.pet1SpayNeuter;
+    console.log('Getting spayed/neutered from form: ', testPet1SpayNeuter);
   }
 
   selectRabiesYear(event) {
-    this.rabiesType1 = (event.detail.value === '1 year') ? '1 year' : '3 year';
-    console.log('this pet 1 rabies type is: ', this.rabiesType1);
+    const testPet1RabiesType = this.boardingResForm.value.pet1RabiesType;
+    console.log('Getting Rabies Type from form: ', testPet1RabiesType);
   }
 
   selectDhppYear(event) {
-    this.dhppType1 = (event.detail.value === '1 year') ? '1 year' : '3 year';
-    console.log('this pet 1 dhpp type is: ', this.dhppType1);
+    const testPet1DhppType = this.boardingResForm.value.pet1DhppType;
+    console.log('Getting DHPP Type from form: ', testPet1DhppType);
   }
 
-  fleaControlSelect(event) {
-    this.fleaControl1 = (event.detail.checked === true) ? true : false;
-    console.log('this pet 1 has flea control: ', this.fleaControl1);
+  selectFleaControl(event) {
+    const testPet1FleaControl = this.boardingResForm.value.pet1FleaControl;
+    console.log('Getting value from form: ', testPet1FleaControl);
   }
+
+  selectFood(event) {
+    const testPet1Food = this.boardingResForm.value.pet1Food;
+    console.log('Getting pet1Food value from form: ', testPet1Food);
+  }
+
+  selectMeds(event) {
+    const testPet1Meds = this.boardingResForm.value.pet1Meds;
+    console.log('Getting pet1Meds value from form: ', testPet1Meds);
+  }
+
 
   onSubmitForm() {
     console.log('Form submitted');
