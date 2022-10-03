@@ -11,6 +11,7 @@ export class ReservationsPage implements OnInit {
   showClient = true;
   showVet = true;
   showPet = true;
+  showRes = true;
   vaccinesFiled: boolean;
 
 
@@ -50,7 +51,27 @@ export class ReservationsPage implements OnInit {
       pet1BordetellaDate: [''],
       pet1FleaControl: [''],
       pet1Food: ['true', Validators.required],
-      pet1Meds: ['false']
+      pet1Meds: ['false'],
+      pet1FoodInfo: ['', Validators.required],
+      pet1MedInfo: ['None', Validators.required],
+
+      pet2Name: ['', Validators.required],
+      pet2Breed: ['', Validators.required],
+      pet2Sex: ['', Validators.required],
+      pet2Dob: ['', Validators.required],
+      pet2Weight: ['', Validators.required],
+      pet2Hair: ['', Validators.required],
+      pet2SpayNeuter: ['', Validators.required],
+      pet2RabiesDate: [''],
+      pet2RabiesType: ['1 year'],
+      pet2DhppDate: [''],
+      pet2DhppType: ['1 year'],
+      pet2BordetellaDate: [''],
+      pet2FleaControl: [''],
+      pet2Food: ['true', Validators.required],
+      pet2Meds: ['false'],
+      pet2FoodInfo: ['', Validators.required],
+      pet2MedInfo: ['None', Validators.required]
     });
    }
 
@@ -138,6 +159,50 @@ export class ReservationsPage implements OnInit {
     return this.boardingResForm.get('pet1Food');
   }
 
+  get pet1FoodInfo() {
+    return this.boardingResForm.get('pet1FoodInfo');
+  }
+
+  get pet1MedInfo() {
+    return this.boardingResForm.get('pet1MedInfo');
+  }
+
+  get pet2Name() {
+    return this.boardingResForm.get('pet2Name');
+  }
+
+  get pet2Breed() {
+    return this.boardingResForm.get('pet2Breed');
+  }
+
+  get pet2Sex() {
+    return this.boardingResForm.get('pet2Sex');
+  }
+
+  get pet2SpayNeuter() {
+    return this.boardingResForm.get('pet2SpayNeuter');
+  }
+
+  get pet2Dob() {
+    return this.boardingResForm.get('pet2Dob');
+  }
+
+  get pet2Weight() {
+    return this.boardingResForm.get('pet2Weight');
+  }
+
+  get pet2Food() {
+    return this.boardingResForm.get('pet2Food');
+  }
+
+  get pet2FoodInfo() {
+    return this.boardingResForm.get('pet2FoodInfo');
+  }
+
+  get pet2MedInfo() {
+    return this.boardingResForm.get('pet2MedInfo');
+  }
+
   ngOnInit() {
     this.vaccinesFiled = true;
   }
@@ -152,6 +217,10 @@ export class ReservationsPage implements OnInit {
 
   toggleShowPetInfo() {
     this.showPet = !this.showPet;
+  }
+
+  toggleShowResInfo() {
+    this.showRes = !this.showRes;
   }
 
   addHyphens(e) {
@@ -174,9 +243,11 @@ export class ReservationsPage implements OnInit {
     console.log('Getting value from form: ', testVaccinesFiled);
   }
 
-  selectSex(event) {
-    const testPet1Sex = this.boardingResForm.value.pet1Sex;
-    console.log('Getting sex from form: ', testPet1Sex);
+  selectSex(event, petSex) {
+    const currentPetSex = petSex;
+    // console.log(event);
+    const testPetSex = this.boardingResForm.value.pet1Sex;
+    console.log(`Getting ${currentPetSex} from form:`, event.detail.value);
   }
 
   selectSpayedNeutered(event) {

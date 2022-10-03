@@ -337,281 +337,638 @@
               </div>
             </ion-col>
           </ion-row>
-          <ion-row #pet1Identification *ngIf="showPet">
-            <ion-col size="12">
-              <h4>Pet 1 Identification</h4>
-            </ion-col>
-            <ion-col size-xs="12" size-md="6">
-              <ion-item lines="none">
-                <div class="input-container">
-                  <div class="input">
-                    <ion-label position="floating">Pet Name 1<span class="required-field">*</span></ion-label>
-                    <ion-input type="text" formControlName="pet1Name" placeholder="Cardiff" required="true"></ion-input>
-                  </div>
-                  <div *ngIf="(pet1Name.dirty || pet1Name.touched) && pet1Name.errors" class="form-errors">
-                    <span *ngIf="pet1Name.errors?.required">Pet name is required</span>
-                  </div>
-                </div>
-              </ion-item>
-            </ion-col>
-            <ion-col size-xs="12" size-md="6">
-              <ion-item lines="none">
-                <div class="input-container">
-                  <div class="input">
-                    <ion-label position="floating">Breed <span class="required-field">*</span></ion-label>
-                    <ion-input type="text" formControlName="pet1Breed" placeholder="Weimaraner" required="true"></ion-input>
-                  </div>
-                  <div *ngIf="(pet1Breed.dirty || pet1Breed.touched) && pet1Breed.errors" class="form-errors">
-                    <span *ngIf="pet1Breed.errors?.required">Breed is required</span>
-                  </div>
-                </div>
-              </ion-item>
-            </ion-col>
-            <ion-col size-xs="12" size-md="6">
-              <ion-item>
-                <div class="input-container">
-                  <div class="input">
-                    <ion-label class="ion-text-wrap" >Sex <span class="required-field">*</span></ion-label>
-                  </div>
-                  <div class="input">
-                    <ion-radio-group formControlName="pet1Sex" (ionChange)="selectSex($event)">
-                      <ion-row>
-                        <ion-col>
-                          <ion-label class="ion-text-wrap">Male</ion-label>
-                          <ion-radio required="true" value="male" color="primary"></ion-radio>
-                        </ion-col>
-                        <ion-col>
-                          <ion-label class="ion-text-wrap">Female</ion-label>
-                          <ion-radio required="true" value="female" color="primary"></ion-radio>
-                        </ion-col>
-                      </ion-row>
-                    </ion-radio-group>
-                  </div>
-                  <div *ngIf="(pet1Sex.dirty || pet1Sex.touched) && pet1Sex.errors" class="form-errors">
-                    <span *ngIf="pet1Sex.errors?.required">Please choose male or female.</span>
-                  </div>
-                </div>
-              </ion-item>
-            </ion-col>
-            <ion-col size-xs="12" size-md="6">
-              <ion-item>
-                <div class="input-container">
-                  <div class="input">
-                    <ion-label class="ion-text-wrap" >Spayed/Neutered? <span class="required-field">*</span></ion-label>
-                  </div>
-                  <div class="input">
-                    <ion-radio-group formControlName="pet1SpayNeuter" required="true" (ionChange)="selectSpayedNeutered($event)">
-                      <ion-row>
-                        <ion-col>
-                          <ion-label class="ion-text-wrap">Yes</ion-label>
-                          <ion-radio value=true color="primary"></ion-radio>
-                        </ion-col>
-                        <ion-col>
-                          <ion-label class="ion-text-wrap">No</ion-label>
-                          <ion-radio value=false color="primary"></ion-radio>
-                        </ion-col>
-                      </ion-row>
-                    </ion-radio-group>
-                  </div>
-                  <div *ngIf="(pet1SpayNeuter.dirty || pet1SpayNeuter.touched) && pet1SpayNeuter.errors" class="form-errors">
-                    <span *ngIf="pet1SpayNeuter.errors?.required">Please answer yes or no.</span>
-                  </div>
-                </div>
-              </ion-item>
-            </ion-col>
-            <ion-col>
-              <ion-item lines="none">
-                <div class="input-container">
-                  <div class="input">
-                    <ion-label position="floating">DOB <span class="required-field">*</span></ion-label>
-                    <ion-input type="text" formControlName="pet1Dob" placeholder="11/20/20" required="true"></ion-input>
-                  </div>
-                  <div *ngIf="(pet1Dob.dirty || pet1Dob.touched) && pet1Dob.errors" class="form-errors">
-                    <span *ngIf="pet1Dob.errors?.required">Date of birth is required</span>
-                  </div>
-                </div>
-              </ion-item>
-            </ion-col>
-            <ion-col>
-              <ion-item lines="none">
-                <div class="input-container">
-                  <div class="input">
-                    <ion-label position="floating">Weight (lbs) <span class="required-field">*</span></ion-label>
-                    <ion-input type="text" formControlName="pet1Weight" placeholder="55" required="true"></ion-input>
-                  </div>
-                  <div *ngIf="(pet1Weight.dirty || pet1Weight.touched) && pet1Weight.errors" class="form-errors">
-                    <span *ngIf="pet1Weight.errors?.required">Weight is required</span>
-                  </div>
-                </div>
-              </ion-item>
-            </ion-col>
-            <ion-col>
-              <ion-item lines="none">
-                <div class="input-container">
-                  <div class="input">
-                    <ion-label position="floating">Coat Type</ion-label>
-                    <ion-input type="text" formControlName="pet1Hair" placeholder="short or long hair"></ion-input>
-                  </div>
-                </div>
-              </ion-item>
-            </ion-col>
-          </ion-row><!-- End of Pet 1 Identificaton -->
-          <ion-row #pet1Vaccine *ngIf="showPet">
-            <ion-col size="12">
-              <h4>Pet 1 Vaccine Info</h4>
-            </ion-col>
-            <ion-col size-xs="12" size-md="6">
-              <ion-item lines="none">
-                <div class="input-container">
-                  <div class="input">
-                    <ion-label position="floating">Rabies</ion-label>
-                    <ion-input type="date" formControlName="pet1RabiesDate"></ion-input>
-                  </div>
-                  <div class="input">
-                    <ion-radio-group formControlName="pet1RabiesType" (ionChange)="selectRabiesYear($event)">
-                      <ion-row>
-                        <ion-col size="3" class="ion-align-self-center">
-                          <ion-label class="ion-text-wrap">1 Year</ion-label>
-                        </ion-col>
-                        <ion-col size="3">
-                          <ion-radio value="1 year" color="primary"></ion-radio>
-                        </ion-col>
-                        <ion-col size="3" class="ion-align-self-center">
-                          <ion-label class="ion-text-wrap">3 Year</ion-label>
-                        </ion-col>
-                        <ion-col size="3">
-                          <ion-radio value="3 year" color="primary"></ion-radio>
-                        </ion-col>
-                      </ion-row>
-                    </ion-radio-group>
-                  </div>
-                </div>
-              </ion-item>
-            </ion-col>
-            <ion-col size-xs="12" size-md="6">
-              <ion-item lines="none">
-                <div class="input-container">
-                  <div class="input">
-                    <ion-label position="floating">DHPP</ion-label>
-                    <ion-input type="date" formControlName="pet1DhppDate"></ion-input>
-                  </div>
-                  <div class="input">
-                    <ion-radio-group formControlName="pet1DhppType" (ionChange)="selectDhppYear($event)">
-                      <ion-row>
-                        <ion-col size="3" class="ion-align-self-center">
-                          <ion-label class="ion-text-wrap">1 Year</ion-label>
-                        </ion-col>
-                        <ion-col size="3">
-                          <ion-radio value="1 year" color="primary"></ion-radio>
-                        </ion-col>
-                        <ion-col size="3" class="ion-align-self-center">
-                          <ion-label class="ion-text-wrap">3 Year</ion-label>
-                        </ion-col>
-                        <ion-col size="3">
-                          <ion-radio value="3 year" color="primary"></ion-radio>
-                        </ion-col>
-                      </ion-row>
-                    </ion-radio-group>
-                  </div>
-                </div>
-              </ion-item>
-            </ion-col>
-            <ion-col>
-              <ion-item lines="none">
-                <div class="input-container">
-                  <div class="input">
-                    <ion-label position="floating">Bordetella</ion-label>
-                    <ion-input type="date" formControlName="pet1BordetellaDate"></ion-input>
-                  </div>
-                </div>
-              </ion-item>
-            </ion-col>
-            <ion-col>
-              <ion-item>
-                <div class="input-container">
-                  <div class="input">
-                    <ion-label class="ion-text-wrap">Flea Control?</ion-label>
-                  </div>
-                  <div class="input">
-                    <ion-radio-group formControlName="pet1FleaControl" (ionChange)="selectFleaControl($event)">
-                      <ion-row>
-                        <ion-col size="3" class="ion-align-self-center">
-                          <ion-label class="ion-text-wrap">Yes</ion-label>
-                        </ion-col>
-                        <ion-col size="3">
-                          <ion-radio value=true color="primary"></ion-radio>
-                        </ion-col>
-                        <ion-col size="3" class="ion-align-self-center">
-                          <ion-label class="ion-text-wrap">No</ion-label>
-                        </ion-col>
-                        <ion-col size="3">
-                          <ion-radio value=false color="primary"></ion-radio>
-                        </ion-col>
-                      </ion-row>
-                    </ion-radio-group>
-                  </div>
-                </div>
-              </ion-item>
-            </ion-col>
-          </ion-row><!-- End of Pet 1 Vaccine Info -->
-          <ion-row #pet1FeedingMeds *ngIf="showPet">
-            <ion-col size="12">
-              <h4>Pet 1 Feeding and Medication Info</h4>
-            </ion-col>
-            <ion-col>
-              <ion-item>
-                <div class="input-container">
-                    <div class="input">
-                      <ion-label class="ion-text-wrap" >Client will provide food? <span class="required-field">*</span></ion-label>
+          <ion-row *ngIf="showPet"><!-- Begin Pet 1 -->
+            <ion-col style="border: 1px solid red; border-radius: 10px; margin-bottom: 20px">
+              <ion-row #pet1Identification>
+                <ion-col size="12">
+                  <h4>Pet 1 Identification</h4>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Pet Name 1<span class="required-field">*</span></ion-label>
+                        <ion-input type="text" formControlName="pet1Name" placeholder="Cardiff" required="true"></ion-input>
+                      </div>
+                      <div *ngIf="(pet1Name.dirty || pet1Name.touched) && pet1Name.errors" class="form-errors">
+                        <span *ngIf="pet1Name.errors?.required">Pet name is required</span>
+                      </div>
                     </div>
-                    <div class="input">
-                      <ion-radio-group formControlName="pet1Food" required="true" (ionChange)="selectFood($event)">
-                        <ion-row>
-                          <ion-col>
-                            <ion-label class="ion-text-wrap">Yes</ion-label>
-                            <ion-radio value=true color="primary"></ion-radio>
-                          </ion-col>
-                          <ion-col>
-                            <ion-label class="ion-text-wrap">No</ion-label>
-                            <ion-radio value=false color="primary"></ion-radio>
-                          </ion-col>
-                        </ion-row>
-                      </ion-radio-group>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Breed <span class="required-field">*</span></ion-label>
+                        <ion-input type="text" formControlName="pet1Breed" placeholder="Weimaraner" required="true"></ion-input>
+                      </div>
+                      <div *ngIf="(pet1Breed.dirty || pet1Breed.touched) && pet1Breed.errors" class="form-errors">
+                        <span *ngIf="pet1Breed.errors?.required">Breed is required</span>
+                      </div>
                     </div>
-                    <div *ngIf="(pet1Food.dirty || pet1Food.touched) && pet1Food.errors" class="form-errors">
-                      <span *ngIf="pet1Food.errors?.required">Please answer yes or no.</span>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item>
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label class="ion-text-wrap" >Sex <span class="required-field">*</span></ion-label>
+                      </div>
+                      <div class="input">
+                        <ion-radio-group formControlName="pet1Sex" (ionChange)="selectSex($event, 'pet1Sex')">
+                          <ion-row>
+                            <ion-col>
+                              <ion-label class="ion-text-wrap">Male</ion-label>
+                              <ion-radio required="true" value="male" color="primary"></ion-radio>
+                            </ion-col>
+                            <ion-col>
+                              <ion-label class="ion-text-wrap">Female</ion-label>
+                              <ion-radio required="true" value="female" color="primary"></ion-radio>
+                            </ion-col>
+                          </ion-row>
+                        </ion-radio-group>
+                      </div>
+                      <div *ngIf="(pet1Sex.dirty || pet1Sex.touched) && pet1Sex.errors" class="form-errors">
+                        <span *ngIf="pet1Sex.errors?.required">Please choose male or female.</span>
+                      </div>
                     </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item>
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label class="ion-text-wrap" >Spayed/Neutered? <span class="required-field">*</span></ion-label>
+                      </div>
+                      <div class="input">
+                        <ion-radio-group formControlName="pet1SpayNeuter" required="true" (ionChange)="selectSpayedNeutered($event)">
+                          <ion-row>
+                            <ion-col>
+                              <ion-label class="ion-text-wrap">Yes</ion-label>
+                              <ion-radio value=true color="primary"></ion-radio>
+                            </ion-col>
+                            <ion-col>
+                              <ion-label class="ion-text-wrap">No</ion-label>
+                              <ion-radio value=false color="primary"></ion-radio>
+                            </ion-col>
+                          </ion-row>
+                        </ion-radio-group>
+                      </div>
+                      <div *ngIf="(pet1SpayNeuter.dirty || pet1SpayNeuter.touched) && pet1SpayNeuter.errors" class="form-errors">
+                        <span *ngIf="pet1SpayNeuter.errors?.required">Please answer yes or no.</span>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">DOB <span class="required-field">*</span></ion-label>
+                        <ion-input type="text" formControlName="pet1Dob" placeholder="11/20/20" required="true"></ion-input>
+                      </div>
+                      <div *ngIf="(pet1Dob.dirty || pet1Dob.touched) && pet1Dob.errors" class="form-errors">
+                        <span *ngIf="pet1Dob.errors?.required">Date of birth is required</span>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Weight (lbs) <span class="required-field">*</span></ion-label>
+                        <ion-input type="text" formControlName="pet1Weight" placeholder="55" required="true"></ion-input>
+                      </div>
+                      <div *ngIf="(pet1Weight.dirty || pet1Weight.touched) && pet1Weight.errors" class="form-errors">
+                        <span *ngIf="pet1Weight.errors?.required">Weight is required</span>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Coat Type</ion-label>
+                        <ion-input type="text" formControlName="pet1Hair" placeholder="short or long hair"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+              </ion-row><!-- End of Pet 1 Identificaton -->
+              <ion-row #pet1Vaccine>
+                <ion-col size="12">
+                  <h4>Pet 1 Vaccine Info</h4>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Rabies</ion-label>
+                        <ion-input type="date" formControlName="pet1RabiesDate"></ion-input>
+                      </div>
+                      <div class="input">
+                        <ion-radio-group formControlName="pet1RabiesType" (ionChange)="selectRabiesYear($event)">
+                          <ion-row>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">1 Year</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value="1 year" color="primary"></ion-radio>
+                            </ion-col>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">3 Year</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value="3 year" color="primary"></ion-radio>
+                            </ion-col>
+                          </ion-row>
+                        </ion-radio-group>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">DHPP</ion-label>
+                        <ion-input type="date" formControlName="pet1DhppDate"></ion-input>
+                      </div>
+                      <div class="input">
+                        <ion-radio-group formControlName="pet1DhppType" (ionChange)="selectDhppYear($event)">
+                          <ion-row>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">1 Year</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value="1 year" color="primary"></ion-radio>
+                            </ion-col>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">3 Year</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value="3 year" color="primary"></ion-radio>
+                            </ion-col>
+                          </ion-row>
+                        </ion-radio-group>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Bordetella</ion-label>
+                        <ion-input type="date" formControlName="pet1BordetellaDate"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label class="ion-text-wrap">Flea Control?</ion-label>
+                      </div>
+                      <div class="input">
+                        <ion-radio-group formControlName="pet1FleaControl" (ionChange)="selectFleaControl($event)">
+                          <ion-row>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">Yes</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value=true color="primary"></ion-radio>
+                            </ion-col>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">No</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value=false color="primary"></ion-radio>
+                            </ion-col>
+                          </ion-row>
+                        </ion-radio-group>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+              </ion-row><!-- End of Pet 1 Vaccine Info -->
+              <ion-row #pet1FeedingMeds>
+                <ion-col size="12">
+                  <h4>Pet 1 Feeding and Medication Info</h4>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item>
+                    <div class="input-container">
+                        <div class="input">
+                          <ion-label class="ion-text-wrap" >Client will provide food? <span class="required-field">*</span></ion-label>
+                        </div>
+                        <div class="input">
+                          <ion-radio-group formControlName="pet1Food" required="true" (ionChange)="selectFood($event)">
+                            <ion-row>
+                              <ion-col>
+                                <ion-label class="ion-text-wrap">Yes</ion-label>
+                                <ion-radio value=true color="primary"></ion-radio>
+                              </ion-col>
+                              <ion-col>
+                                <ion-label class="ion-text-wrap">No</ion-label>
+                                <ion-radio value=false color="primary"></ion-radio>
+                              </ion-col>
+                            </ion-row>
+                          </ion-radio-group>
+                        </div>
+                        <div *ngIf="(pet1Food.dirty || pet1Food.touched) && pet1Food.errors" class="form-errors">
+                          <span *ngIf="pet1Food.errors?.required">Please answer yes or no</span>
+                        </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item>
+                    <div class="input-container">
+                        <div class="input">
+                          <ion-label class="ion-text-wrap" >Pet has medication?</ion-label>
+                        </div>
+                        <div class="input">
+                          <ion-radio-group formControlName="pet1Meds" (ionChange)="selectMeds($event)">
+                            <ion-row>
+                              <ion-col>
+                                <ion-label class="ion-text-wrap">Yes</ion-label>
+                                <ion-radio value=true color="primary"></ion-radio>
+                              </ion-col>
+                              <ion-col>
+                                <ion-label class="ion-text-wrap">No</ion-label>
+                                <ion-radio value=false color="primary"></ion-radio>
+                              </ion-col>
+                            </ion-row>
+                          </ion-radio-group>
+                        </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Feeding Instructions <span class="required-field">*</span></ion-label>
+                        <ion-textarea formControlName="pet1FoodInfo" required="true"></ion-textarea>
+                      </div>
+                      <div *ngIf="(pet1FoodInfo.dirty || pet1FoodInfo.touched) && pet1FoodInfo.errors" class="form-errors">
+                        <span *ngIf="pet1FoodInfo.errors?.required">Please enter feeding instructions</span>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Medication Instructions <span class="required-field">*</span></ion-label>
+                        <ion-textarea formControlName="pet1MedInfo" required="true"></ion-textarea>
+                      </div>
+                      <div *ngIf="(pet1MedInfo.dirty || pet1MedInfo.touched) && pet1MedInfo.errors" class="form-errors">
+                        <span *ngIf="pet1MedInfo.errors?.required">Please enter medication instructions</span>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+              </ion-row><!-- End of Pet 1 Feeding and Medication Info -->
+            </ion-col><!-- End Pet 1 -->
+          </ion-row>
+          <ion-row *ngIf="showPet"><!-- Begin Pet 2 -->
+            <ion-col style="border: 1px solid red; border-radius: 10px">
+              <ion-row #pet2Identification>
+                <ion-col size="12">
+                  <h4>Pet 2 Identification</h4>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Pet Name 2<span class="required-field">*</span></ion-label>
+                        <ion-input type="text" formControlName="pet2Name" placeholder="Cardiff" required="true"></ion-input>
+                      </div>
+                      <div *ngIf="(pet2Name.dirty || pet2Name.touched) && pet2Name.errors" class="form-errors">
+                        <span *ngIf="pet2Name.errors?.required">Pet name is required</span>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Breed <span class="required-field">*</span></ion-label>
+                        <ion-input type="text" formControlName="pet2Breed" placeholder="Weimaraner" required="true"></ion-input>
+                      </div>
+                      <div *ngIf="(pet2Breed.dirty || pet2Breed.touched) && pet2Breed.errors" class="form-errors">
+                        <span *ngIf="pet2Breed.errors?.required">Breed is required</span>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item>
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label class="ion-text-wrap" >Sex <span class="required-field">*</span></ion-label>
+                      </div>
+                      <div class="input">
+                        <ion-radio-group formControlName="pet2Sex" (ionChange)="selectSex($event, 'pet2Sex')">
+                          <ion-row>
+                            <ion-col>
+                              <ion-label class="ion-text-wrap">Male</ion-label>
+                              <ion-radio required="true" value="male" color="primary"></ion-radio>
+                            </ion-col>
+                            <ion-col>
+                              <ion-label class="ion-text-wrap">Female</ion-label>
+                              <ion-radio required="true" value="female" color="primary"></ion-radio>
+                            </ion-col>
+                          </ion-row>
+                        </ion-radio-group>
+                      </div>
+                      <div *ngIf="(pet2Sex.dirty || pet2Sex.touched) && pet2Sex.errors" class="form-errors">
+                        <span *ngIf="pet2Sex.errors?.required">Please choose male or female.</span>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item>
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label class="ion-text-wrap" >Spayed/Neutered? <span class="required-field">*</span></ion-label>
+                      </div>
+                      <div class="input">
+                        <ion-radio-group formControlName="pet2SpayNeuter" required="true" (ionChange)="selectSpayedNeutered($event)">
+                          <ion-row>
+                            <ion-col>
+                              <ion-label class="ion-text-wrap">Yes</ion-label>
+                              <ion-radio value=true color="primary"></ion-radio>
+                            </ion-col>
+                            <ion-col>
+                              <ion-label class="ion-text-wrap">No</ion-label>
+                              <ion-radio value=false color="primary"></ion-radio>
+                            </ion-col>
+                          </ion-row>
+                        </ion-radio-group>
+                      </div>
+                      <div *ngIf="(pet2SpayNeuter.dirty || pet2SpayNeuter.touched) && pet2SpayNeuter.errors" class="form-errors">
+                        <span *ngIf="pet2SpayNeuter.errors?.required">Please answer yes or no.</span>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">DOB <span class="required-field">*</span></ion-label>
+                        <ion-input type="text" formControlName="pet2Dob" placeholder="11/20/20" required="true"></ion-input>
+                      </div>
+                      <div *ngIf="(pet2Dob.dirty || pet2Dob.touched) && pet2Dob.errors" class="form-errors">
+                        <span *ngIf="pet2Dob.errors?.required">Date of birth is required</span>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Weight (lbs) <span class="required-field">*</span></ion-label>
+                        <ion-input type="text" formControlName="pet2Weight" placeholder="55" required="true"></ion-input>
+                      </div>
+                      <div *ngIf="(pet2Weight.dirty || pet2Weight.touched) && pet2Weight.errors" class="form-errors">
+                        <span *ngIf="pet2Weight.errors?.required">Weight is required</span>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Coat Type</ion-label>
+                        <ion-input type="text" formControlName="pet2Hair" placeholder="short or long hair"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+              </ion-row><!-- End of Pet 2 Identificaton -->
+              <ion-row #pet2Vaccine>
+                <ion-col size="12">
+                  <h4>Pet 2 Vaccine Info</h4>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Rabies</ion-label>
+                        <ion-input type="date" formControlName="pet2RabiesDate"></ion-input>
+                      </div>
+                      <div class="input">
+                        <ion-radio-group formControlName="pet2RabiesType" (ionChange)="selectRabiesYear($event)">
+                          <ion-row>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">1 Year</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value="1 year" color="primary"></ion-radio>
+                            </ion-col>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">3 Year</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value="3 year" color="primary"></ion-radio>
+                            </ion-col>
+                          </ion-row>
+                        </ion-radio-group>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">DHPP</ion-label>
+                        <ion-input type="date" formControlName="pet2DhppDate"></ion-input>
+                      </div>
+                      <div class="input">
+                        <ion-radio-group formControlName="pet2DhppType" (ionChange)="selectDhppYear($event)">
+                          <ion-row>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">1 Year</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value="1 year" color="primary"></ion-radio>
+                            </ion-col>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">3 Year</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value="3 year" color="primary"></ion-radio>
+                            </ion-col>
+                          </ion-row>
+                        </ion-radio-group>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Bordetella</ion-label>
+                        <ion-input type="date" formControlName="pet2BordetellaDate"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label class="ion-text-wrap">Flea Control?</ion-label>
+                      </div>
+                      <div class="input">
+                        <ion-radio-group formControlName="pet2FleaControl" (ionChange)="selectFleaControl($event)">
+                          <ion-row>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">Yes</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value=true color="primary"></ion-radio>
+                            </ion-col>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">No</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value=false color="primary"></ion-radio>
+                            </ion-col>
+                          </ion-row>
+                        </ion-radio-group>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+              </ion-row><!-- End of Pet 2 Vaccine Info -->
+              <ion-row #pet2FeedingMeds>
+                <ion-col size="12">
+                  <h4>Pet 2 Feeding and Medication Info</h4>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item>
+                    <div class="input-container">
+                        <div class="input">
+                          <ion-label class="ion-text-wrap" >Client will provide food? <span class="required-field">*</span></ion-label>
+                        </div>
+                        <div class="input">
+                          <ion-radio-group formControlName="pet2Food" required="true" (ionChange)="selectFood($event)">
+                            <ion-row>
+                              <ion-col>
+                                <ion-label class="ion-text-wrap">Yes</ion-label>
+                                <ion-radio value=true color="primary"></ion-radio>
+                              </ion-col>
+                              <ion-col>
+                                <ion-label class="ion-text-wrap">No</ion-label>
+                                <ion-radio value=false color="primary"></ion-radio>
+                              </ion-col>
+                            </ion-row>
+                          </ion-radio-group>
+                        </div>
+                        <div *ngIf="(pet2Food.dirty || pet2Food.touched) && pet2Food.errors" class="form-errors">
+                          <span *ngIf="pet2Food.errors?.required">Please answer yes or no</span>
+                        </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item>
+                    <div class="input-container">
+                        <div class="input">
+                          <ion-label class="ion-text-wrap" >Pet has medication?</ion-label>
+                        </div>
+                        <div class="input">
+                          <ion-radio-group formControlName="pet2Meds" (ionChange)="selectMeds($event)">
+                            <ion-row>
+                              <ion-col>
+                                <ion-label class="ion-text-wrap">Yes</ion-label>
+                                <ion-radio value=true color="primary"></ion-radio>
+                              </ion-col>
+                              <ion-col>
+                                <ion-label class="ion-text-wrap">No</ion-label>
+                                <ion-radio value=false color="primary"></ion-radio>
+                              </ion-col>
+                            </ion-row>
+                          </ion-radio-group>
+                        </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Feeding Instructions <span class="required-field">*</span></ion-label>
+                        <ion-textarea formControlName="pet2FoodInfo" required="true"></ion-textarea>
+                      </div>
+                      <div *ngIf="(pet2FoodInfo.dirty || pet2FoodInfo.touched) && pet2FoodInfo.errors" class="form-errors">
+                        <span *ngIf="pet2FoodInfo.errors?.required">Please enter feeding instructions</span>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Medication Instructions <span class="required-field">*</span></ion-label>
+                        <ion-textarea formControlName="pet2MedInfo" required="true"></ion-textarea>
+                      </div>
+                      <div *ngIf="(pet2MedInfo.dirty || pet2MedInfo.touched) && pet2MedInfo.errors" class="form-errors">
+                        <span *ngIf="pet2MedInfo.errors?.required">Please enter medication instructions</span>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+              </ion-row><!-- End of Pet 2 Feeding and Medication Info -->
+            </ion-col><!-- End Pet 2 -->
+          </ion-row>
+          <!-- END OF PET INFORMATION SECTION -->
+          <ion-row>
+            <ion-col size="12" class="ion-align-items-center section-header">
+              <div class="section-title">
+                <div class="icon-container-header">
+                  <ion-icon name="calendar-outline"></ion-icon>
                 </div>
-              </ion-item>
+                <h1>RESERVATION DATES REQUEST</h1>
+                <ion-button class="show-hide" size="small" shape="round" (click)="toggleShowResInfo()">
+                  <ion-icon *ngIf="showVet" name="caret-down-circle-outline"></ion-icon>
+                  <ion-icon *ngIf="!showVet" name="caret-up-circle-outline"></ion-icon>
+                </ion-button>
+              </div>
             </ion-col>
+          </ion-row>
+          <ion-row #resDates *ngIf="showRes">
             <ion-col>
-              <ion-item>
+              <ion-item lines="none">
                 <div class="input-container">
-                    <div class="input">
-                      <ion-label class="ion-text-wrap" >Pet has medication?</ion-label>
-                    </div>
-                    <div class="input">
-                      <ion-radio-group formControlName="pet1Meds" (ionChange)="selectMeds($event)">
-                        <ion-row>
-                          <ion-col>
-                            <ion-label class="ion-text-wrap">Yes</ion-label>
-                            <ion-radio value=true color="primary"></ion-radio>
-                          </ion-col>
-                          <ion-col>
-                            <ion-label class="ion-text-wrap">No</ion-label>
-                            <ion-radio value=false color="primary"></ion-radio>
-                          </ion-col>
-                        </ion-row>
-                      </ion-radio-group>
-                    </div>
+                  <div class="input">
+                    <ion-label position="floating">Arrival<span class="required-field">*</span></ion-label>
+                    <ion-datetime presentation="date-time"></ion-datetime>
+                    <ion-input type="text" formControlName="vetName" placeholder="Atlanta Vetinarian" required="true"></ion-input>
+                  </div>
                 </div>
               </ion-item>
             </ion-col>
-            
-            
-          </ion-row><!-- End of Pet 1 Feeding and Medication Info -->
-    
-          
+
+          </ion-row><!-- End of Reservation Dates -->
+          <!-- END OF RESERVATION DATES REQUEST SECTION -->
           <ion-row>
             <ion-col class="ion-text-center">
               <ion-button fill="solid" color="secondary" shape="round" mode="ios" >Cancel</ion-button>
