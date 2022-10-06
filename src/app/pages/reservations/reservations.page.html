@@ -948,23 +948,70 @@
                 </div>
                 <h1>RESERVATION DATES REQUEST</h1>
                 <ion-button class="show-hide" size="small" shape="round" (click)="toggleShowResInfo()">
-                  <ion-icon *ngIf="showVet" name="caret-down-circle-outline"></ion-icon>
-                  <ion-icon *ngIf="!showVet" name="caret-up-circle-outline"></ion-icon>
+                  <ion-icon *ngIf="showRes" name="caret-down-circle-outline"></ion-icon>
+                  <ion-icon *ngIf="!showRes" name="caret-up-circle-outline"></ion-icon>
                 </ion-button>
               </div>
             </ion-col>
           </ion-row>
           <ion-row #resDates *ngIf="showRes">
-            <ion-col>
-              <ion-item lines="none">
+            <ion-col size-xs="12" size-md="6">
+              <ion-item id="open-arrival-modal">
+                <ion-icon slot="end" name="calendar-outline"></ion-icon>
                 <div class="input-container">
                   <div class="input">
-                    <ion-label position="floating">Arrival<span class="required-field">*</span></ion-label>
-                    <ion-datetime presentation="date-time"></ion-datetime>
-                    <ion-input type="text" formControlName="vetName" placeholder="Atlanta Vetinarian" required="true"></ion-input>
+                    <ion-label position="floating">Arrival Date &amp; Time<span class="required-field">*</span></ion-label>
+                    <ion-input type="text" formControlName="arrivalDate" value={{dateArrivalString}} placeholder="click here to choose date and time" required="true"></ion-input>
+                  </div>
+                  <div *ngIf="(arrivalDate.dirty || arrivalDate.touched) && arrivalDate.errors" class="form-errors">
+                    <span *ngIf="arrivalDate.errors?.required">Please enter an Arrival Date</span>
                   </div>
                 </div>
               </ion-item>
+              <ion-modal trigger="open-arrival-modal">
+                <ng-template>
+                  <ion-datetime #dateTimeArrivalModal [value]="dateArrivalValue" size="cover"
+                    presentation="date-time"
+                    (ionChange)="modalDateChanged(dateTimeArrivalModal.value)">
+                    <ion-buttons slot="buttons">
+                      <ion-button (click)="close()" color="primary">Dismiss</ion-button>
+                      <ion-button (click)="select()" color="primary">Select</ion-button>
+                    </ion-buttons>
+                  </ion-datetime>
+                </ng-template>
+              </ion-modal>
+            </ion-col>
+            <ion-col size-xs="12" size-md="6">
+              <ion-item>
+                <div class="input-container">
+                    <div class="input">
+                      <ion-label class="ion-text-wrap" >Please Provide<br>Pickup Service</ion-label>
+                    </div>
+                    <div class="input">
+                      <ion-radio-group formControlName="arrivalPickup" (ionChange)="selectPickup($event)">
+                        <ion-row>
+                          <ion-col size="3" class="ion-align-self-center">
+                            <ion-label class="ion-text-wrap">Yes</ion-label>
+                          </ion-col>
+                          <ion-col size="3">
+                            <ion-radio value=true color="primary"></ion-radio>
+                          </ion-col>
+                          <ion-col size="3" class="ion-align-self-center">
+                            <ion-label class="ion-text-wrap">No</ion-label>
+                          </ion-col>
+                          <ion-col size="3">
+                            <ion-radio value=false color="primary"></ion-radio>
+                          </ion-col>
+                        </ion-row>
+                      </ion-radio-group>
+                    </div>
+                </div>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <p class="more-info ion-text-center">
+                If requesting pickup service, POMH will be picking up your pet(s) at your home at the time indicated
+              </p>
             </ion-col>
 
           </ion-row><!-- End of Reservation Dates -->

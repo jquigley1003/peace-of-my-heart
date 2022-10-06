@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IonDatetime } from '@ionic/angular';
+import { format, parseISO } from 'date-fns';
 
 @Component({
   selector: 'app-reservations',
@@ -7,7 +9,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./reservations.page.scss'],
 })
 export class ReservationsPage implements OnInit {
+  @ViewChild (IonDatetime) ionDatetime: IonDatetime;
   boardingResForm: FormGroup;
+  dateArrivalString = '';
+  dateArrivalValue = format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z';
+  showPicker = false;
   showClient = true;
   showVet = true;
   showPet = true;
@@ -71,7 +77,9 @@ export class ReservationsPage implements OnInit {
       pet2Food: ['true', Validators.required],
       pet2Meds: ['false'],
       pet2FoodInfo: ['', Validators.required],
-      pet2MedInfo: ['None', Validators.required]
+      pet2MedInfo: ['None', Validators.required],
+      arrivalDate: ['', Validators.required],
+      arrivalPickup: ['false']
     });
    }
 
@@ -203,8 +211,38 @@ export class ReservationsPage implements OnInit {
     return this.boardingResForm.get('pet2MedInfo');
   }
 
+  get arrivalDate() {
+    return this.boardingResForm.get('arrivalDate');
+  }
+
   ngOnInit() {
     this.vaccinesFiled = true;
+    this.setToday();
+  }
+
+  setToday() {
+    this.dateArrivalString = format(parseISO(format(new Date(), 'yyyy-MM-dd') + 'T00:00:00.000Z'), 'h:mm a, MMM d, yyyy');
+  }
+
+  async dateChanged(value) {
+    this.dateArrivalValue = value;
+    this.dateArrivalString = format(parseISO(value), 'h:mm a, MMM d, yyyy');
+    this.showPicker = false;
+  }
+
+  modalDateChanged(value) {
+    this.dateArrivalValue = value;
+    this.dateArrivalString = format(parseISO(value), 'h:mm a, MMM d, yyyy');
+    this.boardingResForm.value.arrivalDate = this.dateArrivalString;
+    console.log(this.boardingResForm.value.arrivalDate);
+  }
+
+  async close() {
+    await this.ionDatetime.cancel(true);
+  }
+
+  async select() {
+    await this.ionDatetime.confirm(true);
   }
 
   toggleShowClientInfo() {
@@ -280,9 +318,14 @@ export class ReservationsPage implements OnInit {
     console.log('Getting pet1Meds value from form: ', testPet1Meds);
   }
 
+  selectPickup(event) {
+    const testArrivalPickup = this.boardingResForm.value.arrivalPickup;
+    console.log('Getting arrivalPickup value from form: ', testArrivalPickup);
+  }
+
 
   onSubmitForm() {
-    console.log('Form submitted');
+    console.log('Form submitted: ', this.boardingResForm.value);
   }
 
 }
