@@ -16,7 +16,9 @@ export class ReservationsPage implements OnInit {
   showPicker = false;
   showClient = true;
   showVet = true;
-  showPet = true;
+  showPets = true;
+  showPet1 = false;
+  showPet2 = false;
   showRes = true;
   vaccinesFiled: boolean;
 
@@ -254,7 +256,15 @@ export class ReservationsPage implements OnInit {
   }
 
   toggleShowPetInfo() {
-    this.showPet = !this.showPet;
+    this.showPets = !this.showPets;
+  }
+
+  toggleShowPet1() {
+    this.showPet1 = !this.showPet1;
+  }
+
+  toggleShowPet2() {
+    this.showPet2 = !this.showPet2;
   }
 
   toggleShowResInfo() {
