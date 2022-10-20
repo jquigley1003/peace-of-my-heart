@@ -13,6 +13,8 @@ export class ReservationsPage implements OnInit {
   boardingResForm: FormGroup;
   dateArrivalString = '';
   dateArrivalValue = format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z';
+  dateDepartureString = '';
+  dateDepartureValue = format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z';
   showPicker = false;
   showClient = true;
   showVet = true;
@@ -20,6 +22,7 @@ export class ReservationsPage implements OnInit {
   showPet1 = false;
   showPet2 = false;
   showRes = true;
+  showAddServices = true;
   vaccinesFiled: boolean;
 
 
@@ -50,7 +53,7 @@ export class ReservationsPage implements OnInit {
       pet1Sex: ['', Validators.required],
       pet1Dob: ['', Validators.required],
       pet1Weight: ['', Validators.required],
-      pet1Hair: ['', Validators.required],
+      pet1Hair: [''],
       pet1SpayNeuter: ['', Validators.required],
       pet1RabiesDate: [''],
       pet1RabiesType: ['1 year'],
@@ -58,30 +61,33 @@ export class ReservationsPage implements OnInit {
       pet1DhppType: ['1 year'],
       pet1BordetellaDate: [''],
       pet1FleaControl: [''],
-      pet1Food: ['true', Validators.required],
+      pet1Food: ['', Validators.required],
       pet1Meds: ['false'],
       pet1FoodInfo: ['', Validators.required],
       pet1MedInfo: ['None', Validators.required],
 
-      pet2Name: ['', Validators.required],
-      pet2Breed: ['', Validators.required],
-      pet2Sex: ['', Validators.required],
-      pet2Dob: ['', Validators.required],
-      pet2Weight: ['', Validators.required],
-      pet2Hair: ['', Validators.required],
-      pet2SpayNeuter: ['', Validators.required],
+      pet2Name: [''],
+      pet2Breed: [''],
+      pet2Sex: [''],
+      pet2Dob: [''],
+      pet2Weight: [''],
+      pet2Hair: [''],
+      pet2SpayNeuter: [''],
       pet2RabiesDate: [''],
       pet2RabiesType: ['1 year'],
       pet2DhppDate: [''],
       pet2DhppType: ['1 year'],
       pet2BordetellaDate: [''],
       pet2FleaControl: [''],
-      pet2Food: ['true', Validators.required],
+      pet2Food: ['true'],
       pet2Meds: ['false'],
-      pet2FoodInfo: ['', Validators.required],
-      pet2MedInfo: ['None', Validators.required],
+      pet2FoodInfo: [''],
+      pet2MedInfo: ['None'],
+
       arrivalDate: ['', Validators.required],
-      arrivalPickup: ['false']
+      arrivalPickup: ['false'],
+      departureDate: ['', Validators.required],
+      departureDropOff: ['false']
     });
    }
 
@@ -217,6 +223,10 @@ export class ReservationsPage implements OnInit {
     return this.boardingResForm.get('arrivalDate');
   }
 
+  get departureDate() {
+    return this.boardingResForm.get('departureDate');
+  }
+
   ngOnInit() {
     this.vaccinesFiled = true;
     this.setToday();
@@ -224,19 +234,27 @@ export class ReservationsPage implements OnInit {
 
   setToday() {
     this.dateArrivalString = format(parseISO(format(new Date(), 'yyyy-MM-dd') + 'T00:00:00.000Z'), 'h:mm a, MMM d, yyyy');
+    this.dateDepartureString = format(parseISO(format(new Date(), 'yyyy-MM-dd') + 'T00:00:00.000Z'), 'h:mm a, MMM d, yyyy');
   }
 
-  async dateChanged(value) {
-    this.dateArrivalValue = value;
-    this.dateArrivalString = format(parseISO(value), 'h:mm a, MMM d, yyyy');
-    this.showPicker = false;
-  }
+  // async dateChanged(value) {
+  //   this.dateArrivalValue = value;
+  //   this.dateArrivalString = format(parseISO(value), 'h:mm a, MMM d, yyyy');
+  //   this.showPicker = false;
+  // }
 
-  modalDateChanged(value) {
+  modalArrivalDateChanged(value) {
     this.dateArrivalValue = value;
     this.dateArrivalString = format(parseISO(value), 'h:mm a, MMM d, yyyy');
     this.boardingResForm.value.arrivalDate = this.dateArrivalString;
     console.log(this.boardingResForm.value.arrivalDate);
+  }
+
+  modalDepartureDateChanged(value) {
+    this.dateDepartureValue = value;
+    this.dateDepartureString = format(parseISO(value), 'h:mm a, MMM d, yyyy');
+    this.boardingResForm.value.departureDate = this.dateDepartureString;
+    console.log(this.boardingResForm.value.departureDate);
   }
 
   async close() {
@@ -269,6 +287,10 @@ export class ReservationsPage implements OnInit {
 
   toggleShowResInfo() {
     this.showRes = !this.showRes;
+  }
+
+  toggleShowAddServices() {
+    this.showAddServices = !this.showAddServices
   }
 
   addHyphens(e) {
@@ -331,6 +353,11 @@ export class ReservationsPage implements OnInit {
   selectPickup(event) {
     const testArrivalPickup = this.boardingResForm.value.arrivalPickup;
     console.log('Getting arrivalPickup value from form: ', testArrivalPickup);
+  }
+
+  selectDropOff(event) {
+    const testDepartureDropOff = this.boardingResForm.value.departureDropOff;
+    console.log('Getting departureDropOff value from form: ', testDepartureDropOff);
   }
 
 

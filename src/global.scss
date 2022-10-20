@@ -41,6 +41,14 @@ ion-content {
 	--color: white;
 }
 
+.secondary-color {
+	color: var(--ion-color-secondary);
+}
+
+.website-link {
+	color: var(--ion-color-secondary);
+}
+
 .responsive-image {
 	display: flex;
 	flex-direction: column;
