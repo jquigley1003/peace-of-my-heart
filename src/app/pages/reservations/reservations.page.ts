@@ -51,6 +51,7 @@ export class ReservationsPage implements OnInit {
       emergencyPhone1: ['', (Validators.required, Validators.pattern('^((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$'))],
       emergencyName2: [''],
       emergencyPhone2: ['', Validators.pattern('^((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$')],
+      emergencyMaxAmount: ['', Validators.required],
       vetName: ['', Validators.required],
       vetPhone: ['', Validators.required],
       vetEmail: [''],
@@ -161,6 +162,10 @@ export class ReservationsPage implements OnInit {
 
   get emergencyPhone2() {
     return this.boardingResForm.get('emergencyPhone2');
+  }
+
+  get emergencyMaxAmount() {
+    return this.boardingResForm.get('emergencyMaxAmount');
   }
 
   get vetName() {
