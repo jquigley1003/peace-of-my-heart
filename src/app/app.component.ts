@@ -84,7 +84,7 @@ export class AppComponent implements OnInit, OnDestroy {
         if(data.type.valueOf() === 'VERSION_READY') {
           this.alertService.presentAlert(
             'App Update!',
-            'Updated version of We Are One Gaia app is available.',
+            'Updated version of Peace of My Heart app is available.',
             'Load Improved Version?',
             [
               {
