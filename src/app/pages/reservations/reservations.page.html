@@ -16,17 +16,16 @@
     <ion-row>
       <ion-col>
         <div class="welcome-container">
-          <ion-text>
-            <h1>
-              Boarding Reservation Form
-            </h1>
-            <h2>All fields with an asterisk <span class="required-field">*</span> are required</h2>
-            <h2>Show or hide sections by clicking the <ion-icon name="caret-down-circle-outline"></ion-icon> or 
-              <ion-icon name="caret-up-circle-outline"></ion-icon> buttons.</h2>
-          </ion-text>
+          <h1>
+            Boarding Reservation Form
+          </h1>
+          <h2>All fields with an asterisk <span class="required-field">*</span> are required. A green checkmark 
+            <ion-icon color="success" name="checkmark-circle-outline"></ion-icon> will appear next to each section that meet requirements.</h2>
+          <h2>Show or hide sections by clicking the <ion-icon name="caret-down-circle-outline"></ion-icon> or 
+            <ion-icon name="caret-up-circle-outline"></ion-icon> buttons.</h2>
         </div>
         <!-- form -->
-        <form class="form-container" [formGroup]="boardingResForm" (ngSubmit)="onSubmitForm()" (keyup.enter)="onSubmitForm()">
+        <form class="form-container" [formGroup]="boardingResForm" (ngSubmit)="onSubmitForm()">
           <ion-row>
             <ion-col size="12" class="ion-align-items-center section-header">
               <div class="section-title" (click)="toggleShowClientInfo()">
@@ -197,7 +196,7 @@
               <h4>Emergency Contact Info</h4>
               <p class="more-info">NOTE: In the event of an emergency and your pet is in need of veterinarian care, including but not limited 
                 to surgery, an Emergency Contact is the only person other than yourself that can authorize to proceed with 
-                necessary procedure. A POMH representative <span class="emphasize">will not</span> be permitted to provide authorization. 
+                necessary procedure. A POMH representative <b>WILL NOT</b> be permitted to provide authorization. 
                 If your provided Emergency Contact is not reachable, most vet practices will not proceed. However, to avoid this from happening, 
                 you may list me (Stephen Walters 404-547-7329) as an Emergency Contact.</p>
             </ion-col>
@@ -1068,6 +1067,32 @@
                 If requesting return service, POMH will be returning your pet(s) to your home at the time indicated
               </p>
             </ion-col><!--End of Departure Date-->
+            <ion-col size="12">
+              <h4>Exit Bath Package</h4>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item lines="none">
+                <ion-checkbox slot="start" formControlName="exitBath" checked="{{exitBath}}" value="{{exitBath}}" 
+                (ionChange)="selectExitBath($event)"></ion-checkbox>
+                <p class="more-info">Check here for Exit Bath Package for your pet(s). <span class="emphasize">Rates vary based on 
+                  your pet's size and coat.
+                </span>
+                </p>
+              </ion-item>
+            </ion-col><!-- End of Exit Bath Package -->
+            <ion-col size="12">
+              <h4>Special Instructions</h4>
+            </ion-col>
+            <ion-col size-xs="12">
+              <ion-item lines="none">
+                <div class="input-container">
+                  <div class="input">
+                    <ion-label position="floating">Additional Pet Information</ion-label>
+                    <ion-textarea formControlName="specialInstructions"></ion-textarea>
+                  </div>
+                </div>
+              </ion-item>
+            </ion-col><!-- End of Special Instructions -->
             <ion-col size="12" class="hours-container">
               <ion-row>
                 <ion-col class="ion-text-center">
@@ -1115,11 +1140,10 @@
             </ion-col><!--End of Hours of Operation -->
           </ion-row>
           <!-- END OF RESERVATION DATES REQUEST SECTION -->
-
           <ion-row>
             <ion-col size="12" class="ion-align-items-center section-header">
               <div class="section-title" (click)="toggleShowAddServices()">
-                <ion-icon color="success" *ngIf="vetName.valid && vetPhone.valid" name="checkmark-circle-outline"></ion-icon>
+                <ion-icon color="success" name="checkmark-circle-outline"></ion-icon>
                 <div class="icon-container-header">
                   <ion-icon name="heart-circle-outline"></ion-icon>
                 </div>
@@ -1132,63 +1156,227 @@
             </ion-col>
           </ion-row>
           <ion-row #additionalServices *ngIf="showAddServices">
-            <ion-col>
-              <ion-item lines="none">
-                <div class="input-container">
-                  <div class="input">
-                    <ion-label position="floating">Vetinarian - Name of Practice<span class="required-field">*</span></ion-label>
-                    <ion-input type="text" formControlName="vetName" placeholder="Atlanta Vetinarian" required="true"></ion-input>
-                  </div>
-                  <div *ngIf="(vetName.dirty || vetName.touched) && vetName.errors" class="form-errors">
-                    <span *ngIf="vetName.errors?.required">Vet Practice Name is required</span>
-                  </div>
-                </div>
-              </ion-item>
-            </ion-col>
-            <ion-col>
-              <ion-item lines="none">
-                <div class="input-container">
-                  <div class="input">
-                    <ion-label position="floating">Vet Phone<span class="required-field">*</span></ion-label>
-                    <ion-input type="tel" (keyup)="addHyphens($event)" formControlName="vetPhone" placeholder="404-555-5555" required="true"></ion-input>
-                  </div>
-                  <div *ngIf="(vetPhone.dirty || vetPhone.touched) && vetPhone.errors" class="form-errors">
-                    <span *ngIf="vetPhone.errors?.required">Phone number is required</span>
-                    <span *ngIf="vetPhone.errors?.pattern">10 numbers: Hyphens added automatically</span>
-                  </div>
-                </div>
-              </ion-item>
-            </ion-col>
-            <ion-col>
-              <ion-item lines="none">
-                <div class="input-container">
-                  <div class="input">
-                    <ion-label position="floating">Vet Email</ion-label>
-                    <ion-input type="email" formControlName="vetEmail" placeholder="vetEmail@gmail.com"></ion-input>
-                  </div>
-                </div>
-              </ion-item>
+            <ion-col size="12">
+              <h4>Consent Form on File</h4>
             </ion-col>
             <ion-col size="12">
-              <h4>Vaccinations on File</h4>
-              <ion-item>
-                <ion-checkbox slot="start" formControlName="vetVaccinesFiled" checked="{{vaccinesFiled}}" value="{{vaccinesFiled}}" 
-                (ionChange)="selectVaccinesFiled($event)"></ion-checkbox>
-                <p class="more-info">Check here if vaccines are on file with Peace of My Heart. If they are current 
-                  and already on file with POMH, you do not need to fill out vaccine information for your pet, except when your 
-                  pets have received their boosters. <span class="emphasize">NOTE: If booster or initial vaccines have 
-                  been given to your pet within 10 days of arrival date, your pet will not be permitted to board here.</span>
+              <ion-item lines="none">
+                <ion-checkbox slot="start" formControlName="consentFormFiled" checked="{{consentFormFiled}}" value="{{consentFormFiled}}" 
+                (ionChange)="selectConsentFormFiled($event)"></ion-checkbox>
+                <p class="more-info">Check here if Consent Form is on file with Peace of My Heart. <span class="emphasize">Consent Form required for all services 
+                  that are off-site. Any services requested will be available provided your pet meets all behavioral requirements.</span>
                 </p>
               </ion-item>
+            </ion-col><!-- End of Consent Form -->
+            <ion-col size="12">
+              <h4>Field Trips - Off-site Excursions</h4>
             </ion-col>
+            <ion-col class="services-container" size="12">
+              <ion-row>
+                <ion-col size="12" size-md="6">
+                  <ion-item lines="none">
+                    <ion-checkbox slot="start" formControlName="fieldTripFull" checked="{{fieldTripFull}}" value="{{fieldTripFull}}" 
+                    (ionChange)="selectFieldTripFull($event)"></ion-checkbox>
+                    <p class="more-info">Field Trip - Full Day (up to 6 Hours)
+                    </p>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating" class="ion-text-wrap">How many during this visit?</ion-label>
+                        <ion-input type="number" formControlName="howManyFullTrips" placeholder="1"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12">
+                  <ion-item>
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label class="ion-text-wrap" >Bath after Full Day Field Trip?</ion-label>
+                      </div>
+                      <div class="input">
+                        <ion-radio-group formControlName="bathFieldTripFull" (ionChange)="selectBathTripFull($event)">
+                          <ion-row>
+                            <ion-col size="3" class="ion-align-self-center ion-text-right">
+                              <ion-label class="ion-text-wrap">Yes</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value=true color="primary"></ion-radio>
+                            </ion-col>
+                            <ion-col size="3" class="ion-align-self-center ion-text-right">
+                              <ion-label class="ion-text-wrap">No</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value=false color="primary"></ion-radio>
+                            </ion-col>
+                          </ion-row>
+                        </ion-radio-group>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-col><!-- End of Full Day Field Trip -->
+            <ion-col class="services-container" size="12">
+              <ion-row>
+                <ion-col size="12" size-md="6">
+                  <ion-item lines="none">
+                    <ion-checkbox slot="start" formControlName="fieldTripHalf" checked="{{fieldTripHalf}}" value="{{fieldTripHalf}}" 
+                    (ionChange)="selectFieldTripHalf($event)"></ion-checkbox>
+                    <p class="more-info">Field Trip - Half Day (up to 3 Hours)
+                    </p>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating" class="ion-text-wrap">How many during this visit?</ion-label>
+                        <ion-input type="number" formControlName="howManyHalfTrips" placeholder="1"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12">
+                  <ion-item>
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label class="ion-text-wrap" >Bath after Half Day Field Trip?</ion-label>
+                      </div>
+                      <div class="input">
+                        <ion-radio-group formControlName="bathFieldTripHalf" (ionChange)="selectBathTripHalf($event)">
+                          <ion-row>
+                            <ion-col size="3" class="ion-align-self-center ion-text-right">
+                              <ion-label class="ion-text-wrap">Yes</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value=true color="primary"></ion-radio>
+                            </ion-col>
+                            <ion-col size="3" class="ion-align-self-center ion-text-right">
+                              <ion-label class="ion-text-wrap">No</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value=false color="primary"></ion-radio>
+                            </ion-col>
+                          </ion-row>
+                        </ion-radio-group>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-col><!-- End of Half Day Field Trip -->
+            <ion-col size="12">
+              <h4>Patio Dates - Off-site Restaurant or Coffee Shop</h4>
+            </ion-col>
+            <ion-col size="12">
+              <ion-row>
+                <ion-col size="12" size-md="6">
+                  <ion-item lines="none">
+                    <ion-checkbox slot="start" formControlName="patioDate" checked="{{patioDate}}" value="{{patioDate}}" 
+                    (ionChange)="selectPatioDate($event)"></ion-checkbox>
+                    <p class="more-info">Patio Dates with POMH Staff
+                    </p>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating" class="ion-text-wrap">How many during this visit?</ion-label>
+                        <ion-input type="number" formControlName="howManyPatioDates" placeholder="1"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-col><!-- End of Patio Dates -->
+            <ion-col size="12">
+              <h4>Individual Attention</h4>
+            </ion-col>
+            <ion-col size="12">
+              <ion-row>
+                <ion-col size="12" size-md="6">
+                  <ion-item lines="none">
+                    <ion-checkbox slot="start" formControlName="individualAttention" checked="{{individualAttention}}" value="{{individualAttention}}" 
+                    (ionChange)="selectIndividualAttention($event)"></ion-checkbox>
+                    <p class="more-info">Individual attention - 30 minutes per pet
+                    </p>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating" class="ion-text-wrap">How many during this visit?</ion-label>
+                        <ion-input type="number" formControlName="howManyIndividuals" placeholder="1"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-col><!-- End of Individual Attention -->
+            <ion-col size="12">
+              <h4>Treats</h4>
+            </ion-col>
+            <ion-col class="services-container" size="12">
+              <ion-row>
+                <ion-col size="12" size-md="6">
+                  <ion-item lines="none">
+                    <ion-checkbox slot="start" formControlName="bakedTreats" checked="{{bakedTreats}}" value="{{bakedTreats}}" 
+                    (ionChange)="selectBakedTreats($event)"></ion-checkbox>
+                    <p class="more-info">Fresh Baked Treats
+                    </p>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating" class="ion-text-wrap">How many during this visit?</ion-label>
+                        <ion-input type="number" formControlName="howManyBakedTreats" placeholder="1"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col class="services-container" size="12">
+              <ion-row>
+                <ion-col size="12" size-md="6">
+                  <ion-item lines="none">
+                    <ion-checkbox slot="start" formControlName="iceCreamCups" checked="{{iceCreamCups}}" value="{{iceCreamCups}}" 
+                    (ionChange)="selectIceCreamCups($event)"></ion-checkbox>
+                    <p class="more-info">Ice Cream Cups
+                    </p>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating" class="ion-text-wrap">How many during this visit?</ion-label>
+                        <ion-input type="number" formControlName="howManyIceCreamCups" placeholder="1"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-col><!-- End of Treats -->
           </ion-row>
           <!-- END OF ADDITIONAL SERVICES SECTION -->
 
           <ion-row>
-            <ion-col class="ion-text-center">
-              <ion-button fill="solid" color="secondary" shape="round" mode="ios" >Cancel</ion-button>
+            <ion-col size="12" class="ion-text-center">
+              <h4>By Clicking Submit, you indicate that you have read POMH Policies</h4>
+            </ion-col>
+            <ion-col class="ion-text-center" size="12">
               <ion-button class="submit" type="submit" strong="true" expand="block" shape="round" mode="ios" 
               [disabled]="!boardingResForm.valid">Submit</ion-button>
+              <ion-button fill="solid" color="secondary" shape="round" mode="ios" >Cancel</ion-button>
             </ion-col>
           </ion-row>
         </form>

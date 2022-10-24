@@ -126,12 +126,18 @@ ion-content {
 		margin-bottom: 20px;
 	}
 
+	.services-container {
+		border: 1px solid white;
+		border-radius: 10px;
+		margin-bottom: 20px;
+	}
+
 	.more-info {
 		font-size: 1em;
 	}
 
 	.emphasize {
 		font-weight: bold;
-		text-decoration: underline;
+		color: black
 	}
 }

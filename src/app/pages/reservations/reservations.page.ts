@@ -16,15 +16,22 @@ export class ReservationsPage implements OnInit {
   dateDepartureString = '';
   dateDepartureValue = format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z';
   showPicker = false;
-  showClient = true;
-  showVet = true;
-  showPets = true;
+  showClient = false;
+  showVet = false;
+  showPets = false;
   showPet1 = false;
   showPet2 = false;
-  showRes = true;
+  showRes = false;
   showAddServices = true;
   vaccinesFiled: boolean;
-
+  consentFormFiled: boolean;
+  exitBath: boolean;
+  fieldTripFull: boolean;
+  fieldTripHalf: boolean;
+  patioDate: boolean;
+  individualAttention: boolean;
+  bakedTreats: boolean;
+  iceCreamCups: boolean;
 
   constructor(
     private formBuilder: FormBuilder
@@ -87,7 +94,24 @@ export class ReservationsPage implements OnInit {
       arrivalDate: ['', Validators.required],
       arrivalPickup: ['false'],
       departureDate: ['', Validators.required],
-      departureDropOff: ['false']
+      departureDropOff: ['false'],
+      specialInstructions: [''],
+      consentFormFiled: ['false'],
+      exitBath: ['false'],
+      fieldTripFull: ['false'],
+      howManyFullTrips: ['0'],
+      bathFieldTripFull: [''],
+      fieldTripHalf: ['false'],
+      howManyHalfTrips: ['0'],
+      bathFieldTripHalf: [''],
+      patioDate: ['false'],
+      howManyPatioDates: ['0'],
+      individualAttention: ['false'],
+      howManyIndividuals: ['0'],
+      bakedTreats: ['false'],
+      howManyBakedTreats: ['0'],
+      iceCreamCups: ['false'],
+      howManyIceCreamCups: ['0']
     });
    }
 
@@ -360,6 +384,61 @@ export class ReservationsPage implements OnInit {
     console.log('Getting departureDropOff value from form: ', testDepartureDropOff);
   }
 
+  selectConsentFormFiled(event) {
+    this.consentFormFiled = (event.detail.checked === true) ? true : false;
+    console.log('consent form is on file: ', this.consentFormFiled);
+    const testConsentFormFiled = this.boardingResForm.value.consentFormFiled;
+    console.log('Getting value from form: ', testConsentFormFiled);
+  }
+
+  selectExitBath(event) {
+    const testExitBath = this.boardingResForm.value.exitBath;
+    console.log('Getting exitBath value from form: ', testExitBath);
+  }
+
+  selectFieldTripFull(event) {
+    this.fieldTripFull = (event.detail.checked === true) ? true : false;
+    console.log('Field Trip Full Day: ', this.fieldTripFull);
+    const testFieldTripFull = this.boardingResForm.value.fieldTripFull;
+    console.log('Getting value from form: ', testFieldTripFull);
+  }
+
+  selectBathTripFull(event) {
+    const testFtFullBath = this.boardingResForm.value.bathFieldTripFull;
+    console.log('Getting bathFieldTripFull value from form: ', testFtFullBath);
+  }
+
+  selectFieldTripHalf(event) {
+    this.fieldTripHalf = (event.detail.checked === true) ? true : false;
+    console.log('Field Trip Half Day: ', this.fieldTripHalf);
+    const testFieldTripHalf = this.boardingResForm.value.fieldTripHalf;
+    console.log('Getting value from form: ', testFieldTripHalf);
+  }
+
+  selectBathTripHalf(event) {
+    const testFtHalfBath = this.boardingResForm.value.bathFieldTripHalf;
+    console.log('Getting bathFieldTripHalf value from form: ', testFtHalfBath);
+  }
+
+  selectPatioDate(event) {
+    const testPatioDate = this.boardingResForm.value.patioDate;
+    console.log('Getting patioDate value from form: ', testPatioDate);
+  }
+
+  selectIndividualAttention(event) {
+    const testIndividualAttention = this.boardingResForm.value.individualAttention;
+    console.log('Getting IndividualAttention value from form: ', testIndividualAttention);
+  }
+
+  selectBakedTreats(event) {
+    const testBakedTreats = this.boardingResForm.value.bakedTreats;
+    console.log('Getting BakedTreats value from form: ', testBakedTreats);
+  }
+
+  selectIceCreamCups(event) {
+    const testIceCreamCups = this.boardingResForm.value.iceCreamCups;
+    console.log('Getting IceCreamCups value from form: ', testIceCreamCups);
+  }
 
   onSubmitForm() {
     console.log('Form submitted: ', this.boardingResForm.value);
