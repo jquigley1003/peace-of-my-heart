@@ -18,6 +18,7 @@ export class ReservationsPage implements OnInit, OnDestroy {
   @ViewChild (IonDatetime) ionDatetime: IonDatetime;
   ngUnsubscribe = new Subject<void>();
   clientPets: Pet[] = [];
+  petHeader: string;
   boardingResForm: FormGroup;
   dateArrivalString = '';
   dateArrivalValue = format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z';
@@ -273,11 +274,13 @@ export class ReservationsPage implements OnInit, OnDestroy {
 
   addPets() {
     this.clientPets.forEach(pet => {
-      console.log('addPets result: ', pet.petName);
+      console.log('addPets result: ', pet);
       const petForm = this.formBuilder.group({
         petHeader: [pet.petName],
         petName: [pet.petName, Validators.required],
-        petBreed: [pet.petBreed, Validators.required]
+        petBreed: [pet.petBreed, Validators.required],
+        petSex: [pet.petSex, Validators.required],
+        petSpayNeuter: [pet.petSpayNeuter, Validators.required]
       });
       this.pets.push(petForm);
     });
