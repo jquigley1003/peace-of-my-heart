@@ -1,15 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { IonDatetime } from '@ionic/angular';
+
 import { format, parseISO } from 'date-fns';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Pet } from 'src/app/shared/models/pet.model';
+
+import { PetService } from 'src/app/shared/pet/pet.service';
 
 @Component({
   selector: 'app-reservations',
   templateUrl: './reservations.page.html',
   styleUrls: ['./reservations.page.scss'],
 })
-export class ReservationsPage implements OnInit {
+export class ReservationsPage implements OnInit, OnDestroy {
   @ViewChild (IonDatetime) ionDatetime: IonDatetime;
+  ngUnsubscribe = new Subject<void>();
+  clientPets: Pet[] = [];
   boardingResForm: FormGroup;
   dateArrivalString = '';
   dateArrivalValue = format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z';
@@ -23,6 +31,7 @@ export class ReservationsPage implements OnInit {
   showPet2 = false;
   showRes = false;
   showAddServices = true;
+  showRefresh = false;
   vaccinesFiled: boolean;
   consentFormFiled: boolean;
   exitBath: boolean;
@@ -34,7 +43,8 @@ export class ReservationsPage implements OnInit {
   iceCreamCups: boolean;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private petService: PetService
   ) {
     this.boardingResForm = this.formBuilder.group({
       clientFirstName: ['', Validators.required],
@@ -56,6 +66,8 @@ export class ReservationsPage implements OnInit {
       vetPhone: ['', Validators.required],
       vetEmail: [''],
       vetVaccinesFiled: [''],
+      pets: this.formBuilder.array([]),
+      // pets: new FormControl('', Validators.required),
       pet1Name: ['', Validators.required],
       pet1Breed: ['', Validators.required],
       pet1Sex: ['', Validators.required],
@@ -176,6 +188,10 @@ export class ReservationsPage implements OnInit {
     return this.boardingResForm.get('vetPhone');
   }
 
+  get pets(){
+    return this.boardingResForm.controls.pets as FormArray;
+  }
+
   get pet1Name() {
     return this.boardingResForm.get('pet1Name');
   }
@@ -212,42 +228,6 @@ export class ReservationsPage implements OnInit {
     return this.boardingResForm.get('pet1MedInfo');
   }
 
-  get pet2Name() {
-    return this.boardingResForm.get('pet2Name');
-  }
-
-  get pet2Breed() {
-    return this.boardingResForm.get('pet2Breed');
-  }
-
-  get pet2Sex() {
-    return this.boardingResForm.get('pet2Sex');
-  }
-
-  get pet2SpayNeuter() {
-    return this.boardingResForm.get('pet2SpayNeuter');
-  }
-
-  get pet2Dob() {
-    return this.boardingResForm.get('pet2Dob');
-  }
-
-  get pet2Weight() {
-    return this.boardingResForm.get('pet2Weight');
-  }
-
-  get pet2Food() {
-    return this.boardingResForm.get('pet2Food');
-  }
-
-  get pet2FoodInfo() {
-    return this.boardingResForm.get('pet2FoodInfo');
-  }
-
-  get pet2MedInfo() {
-    return this.boardingResForm.get('pet2MedInfo');
-  }
-
   get arrivalDate() {
     return this.boardingResForm.get('arrivalDate');
   }
@@ -259,7 +239,10 @@ export class ReservationsPage implements OnInit {
   ngOnInit() {
     this.vaccinesFiled = true;
     this.setToday();
+    this.initializeUserPets();
   }
+
+
 
   setToday() {
     this.dateArrivalString = format(parseISO(format(new Date(), 'yyyy-MM-dd') + 'T00:00:00.000Z'), 'h:mm a, MMM d, yyyy');
@@ -271,6 +254,41 @@ export class ReservationsPage implements OnInit {
   //   this.dateArrivalString = format(parseISO(value), 'h:mm a, MMM d, yyyy');
   //   this.showPicker = false;
   // }
+
+  async initializeUserPets() {
+    if (this.clientPets === null || this.clientPets.length === 0) {
+      this.petService.getUserPets()
+      .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(data => {
+          this.clientPets = data;
+          this.addPets();
+          console.log('clientPets in initializeUserPets: ', this.clientPets);
+        });
+    } else {
+      this.showRefresh = false;
+      this.addPets();
+    }
+
+  }
+
+  addPets() {
+    this.clientPets.forEach(pet => {
+      console.log('addPets result: ', pet.petName);
+      const petForm = this.formBuilder.group({
+        petHeader: [pet.petName],
+        petName: [pet.petName, Validators.required],
+        petBreed: [pet.petBreed, Validators.required]
+      });
+      this.pets.push(petForm);
+    });
+  }
+
+  removePet(index) {
+    this.pets.removeAt(index);
+    if (this.pets.value.length === 0) {
+      this.showRefresh = true;
+    }
+  }
 
   modalArrivalDateChanged(value) {
     this.dateArrivalValue = value;
@@ -319,7 +337,7 @@ export class ReservationsPage implements OnInit {
   }
 
   toggleShowAddServices() {
-    this.showAddServices = !this.showAddServices
+    this.showAddServices = !this.showAddServices;
   }
 
   addHyphens(e) {
@@ -345,13 +363,12 @@ export class ReservationsPage implements OnInit {
   selectSex(event, petSex) {
     const currentPetSex = petSex;
     // console.log(event);
-    const testPetSex = this.boardingResForm.value.pet1Sex;
     console.log(`Getting ${currentPetSex} from form:`, event.detail.value);
   }
 
-  selectSpayedNeutered(event) {
-    const testPet1SpayNeuter = this.boardingResForm.value.pet1SpayNeuter;
-    console.log('Getting spayed/neutered from form: ', testPet1SpayNeuter);
+  selectSpayedNeutered(event, petSpayNeuter) {
+    const currentPetSpayNeuter = petSpayNeuter;
+    console.log(`Getting ${currentPetSpayNeuter} from form: `, event.detail.value);
   }
 
   selectRabiesYear(event) {
@@ -447,6 +464,11 @@ export class ReservationsPage implements OnInit {
 
   onSubmitForm() {
     console.log('Form submitted: ', this.boardingResForm.value);
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

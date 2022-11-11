@@ -25,7 +25,7 @@
             <ion-icon name="caret-up-circle-outline"></ion-icon> buttons.</h2>
         </div>
         <!-- form -->
-        <form class="form-container" [formGroup]="boardingResForm" (ngSubmit)="onSubmitForm()">
+        <form class="form-container" [formGroup]="boardingResForm" (ngSubmit)="onSubmitForm()" (keyup.enter)="onSubmitForm()">
           <ion-row>
             <ion-col size="12" class="ion-align-items-center section-header">
               <div class="section-title" (click)="toggleShowClientInfo()">
@@ -344,9 +344,7 @@
           <ion-row>
             <ion-col size="12" class="ion-align-items-center section-header">
               <div class="section-title" (click)="toggleShowPetInfo()">
-                <ion-icon color="success" *ngIf="pet1Name.valid && pet1Breed.valid && pet1Sex.valid &&
-                pet1Dob.valid && pet1Weight.valid && pet1SpayNeuter.valid &&
-                pet1Food.valid && pet1FoodInfo.valid && pet1MedInfo.valid" name="checkmark-circle-outline"></ion-icon>
+                <ion-icon color="success" *ngIf="this.boardingResForm.controls.pets.valid" name="checkmark-circle-outline"></ion-icon>
                 <div class="icon-container-header">
                   <ion-icon name="paw-outline"></ion-icon>
                 </div>
@@ -357,6 +355,80 @@
                 </ion-button>
               </div>
             </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="showPets" formArrayName="pets">
+            <ion-col *ngIf="!clientPets || showRefresh" size="12">
+              <ion-button expand="block" (click)="initializeUserPets()">Click Here to Refresh Pet Information</ion-button>
+            </ion-col>
+            <ion-col size="12" *ngFor="let pet of pets.controls; let i = index" class="pet-container">
+              <ion-row #pet1Identification>
+                <ion-col size="12">
+                  <ion-item lines="none" [formGroupName]="i">
+                    <ion-input type="text" formControlName="petHeader"></ion-input>
+                    <ion-button (click)="removePet(i)">Remove from Reservation</ion-button>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12">
+                  <h4>Pet Identification</h4>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none" [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Pet Name<span class="required-field">*</span></ion-label>
+                        <ion-input type="text" formControlName="petName" placeholder="Cardiff" required="true"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none" [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Breed <span class="required-field">*</span></ion-label>
+                        <ion-input type="text" formControlName="petBreed" placeholder="Weimaraner" required="true"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+
+              
+                <!-- <ion-col size="12">
+                  <ion-item [formGroupName]="i">
+                    <ion-input formControlName="petName"></ion-input>
+                  </ion-item>
+                  <ion-item [formGroupName]="i">
+                    <ion-input formControlName="petBreed"></ion-input>
+                  </ion-item>
+                </ion-col> -->
+                <!-- <ion-col size="12">
+                  <ion-button expand="block" color="light">{{ pet.petName }}
+                    <ion-icon *ngIf="showPet1" slot="end" name="caret-down-circle-outline"></ion-icon>
+                    <ion-icon *ngIf="!showPet1" slot="end" name="caret-up-circle-outline"></ion-icon>
+                  </ion-button>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Pet Name<span class="required-field">*</span></ion-label>
+                        <ion-input type="text" name="{{ pet.petName }}" value="{{ pet.petName }}" 
+                          formControlName="petName" placeholder="Cardiff" required="true"></ion-input>
+                      </div> -->
+                      <!-- <div *ngIf="(clientPet.pet.petName.dirty || clientPet.pet.petName.touched) && clientPet.pet.petName.errors" class="form-errors">
+                        <span *ngIf="clientPet.pet.petName.errors?.required">Pet name is required</span>
+                      </div> -->
+                    <!-- </div>
+                  </ion-item>
+                </ion-col> -->
+              </ion-row>
+            </ion-col>
+            
+
+
+            
+
           </ion-row>
           <ion-row *ngIf="showPets"><!-- Begin Pet 1 -->
             <ion-col size="12">
@@ -429,7 +501,7 @@
                         <ion-label class="ion-text-wrap" >Spayed/Neutered? <span class="required-field">*</span></ion-label>
                       </div>
                       <div class="input">
-                        <ion-radio-group formControlName="pet1SpayNeuter" (ionChange)="selectSpayedNeutered($event)">
+                        <ion-radio-group formControlName="pet1SpayNeuter" (ionChange)="selectSpayedNeutered($event, 'pet1SpayNeuter')">
                           <ion-row>
                             <ion-col>
                               <ion-label class="ion-text-wrap">Yes</ion-label>
@@ -727,7 +799,7 @@
                         <ion-label class="ion-text-wrap" >Spayed/Neutered?</ion-label>
                       </div>
                       <div class="input">
-                        <ion-radio-group formControlName="pet2SpayNeuter" (ionChange)="selectSpayedNeutered($event)">
+                        <ion-radio-group formControlName="pet2SpayNeuter" (ionChange)="selectSpayedNeutered($event, 'pet2SpayNeuter')">
                           <ion-row>
                             <ion-col>
                               <ion-label class="ion-text-wrap">Yes</ion-label>

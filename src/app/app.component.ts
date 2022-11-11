@@ -8,8 +8,9 @@ import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { User } from './shared/models/user.model';
-import { AlertService } from './shared/notify/alert.service';
 import { AuthService } from './shared/auth/auth.service';
+import { PetService } from './shared/pet/pet.service';
+import { AlertService } from './shared/notify/alert.service';
 import { ToastService } from './shared/notify/toast.service';
 import { RegisterModalComponent } from './shared/components/register-modal/register-modal.component';
 import { SignInModalComponent } from './shared/components/sign-in-modal/sign-in-modal.component';
@@ -68,6 +69,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private swUpdate: SwUpdate,
     private modalCtrl: ModalController,
     private authService: AuthService,
+    private petService: PetService,
     private toastService: ToastService,
     private alertService: AlertService,
     private router: Router
@@ -129,6 +131,7 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe(async data => {
         if(data) {
           this.userFullName = await data.firstName + ' ' + data.lastName;
+          this.initializeUserPets(data.uid);
           // console.log('app component currentUserData fullname = ', this.userFullName);
         } else {
           this.userFullName = null;
@@ -149,6 +152,10 @@ export class AppComponent implements OnInit, OnDestroy {
         // console.log('app component isAdmin = ', this.isAdmin);
       }
     });
+  }
+
+  initializeUserPets(petParentId) {
+    this.petService.fetchUserPets(petParentId);
   }
 
   async presentRegisterModal() {
