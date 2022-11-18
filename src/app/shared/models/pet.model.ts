@@ -4,6 +4,7 @@ export interface Pet {
 	petBreed: string;
 	petSex: string;
 	petColor: string;
+	petDob: Date;
 	petWeight: number;
 	petHair: string;
 	petSpayNeuter: boolean;

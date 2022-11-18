@@ -441,9 +441,37 @@
                     </div>
                   </ion-item>
                 </ion-col>
-              
-                
-              </ion-row>
+                <ion-col>
+                  <ion-item lines="none" [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">DOB <span class="required-field">*</span></ion-label>
+                        <ion-input type="text" formControlName="petDob" placeholder="11/20/20" required="true"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item lines="none" [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Weight (lbs) <span class="required-field">*</span></ion-label>
+                        <ion-input type="text" formControlName="petWeight" placeholder="55" required="true"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item lines="none" [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Coat Type</ion-label>
+                        <ion-input type="text" formControlName="petHair" placeholder="short or long hair"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+              </ion-row><!-- End of Pet Identificaton -->
             </ion-col>
             
 

@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { IonDatetime } from '@ionic/angular';
 
 import { format, parseISO } from 'date-fns';
+import { Timestamp } from 'firebase/firestore';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Pet } from 'src/app/shared/models/pet.model';
@@ -20,6 +21,7 @@ export class ReservationsPage implements OnInit, OnDestroy {
   clientPets: Pet[] = [];
   petHeader: string;
   boardingResForm: FormGroup;
+  petDobString = '';
   dateArrivalString = '';
   dateArrivalValue = format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z';
   dateDepartureString = '';
@@ -275,12 +277,16 @@ export class ReservationsPage implements OnInit, OnDestroy {
   addPets() {
     this.clientPets.forEach(pet => {
       console.log('addPets result: ', pet);
+      this.getPetDob(pet.petDob);
       const petForm = this.formBuilder.group({
         petHeader: [pet.petName],
         petName: [pet.petName, Validators.required],
         petBreed: [pet.petBreed, Validators.required],
         petSex: [pet.petSex, Validators.required],
-        petSpayNeuter: [pet.petSpayNeuter, Validators.required]
+        petSpayNeuter: [pet.petSpayNeuter, Validators.required],
+        petDob: [this.petDobString, Validators.required],
+        petWeight: [pet.petWeight, Validators.required],
+        petHair: [pet.petHair, Validators.required]
       });
       this.pets.push(petForm);
     });
@@ -291,6 +297,12 @@ export class ReservationsPage implements OnInit, OnDestroy {
     if (this.pets.value.length === 0) {
       this.showRefresh = true;
     }
+  }
+
+  getPetDob(value) {
+    const petDob = new Timestamp(value.seconds , value.nanoseconds).toDate().toISOString();
+    this.petDobString = format(parseISO(petDob), 'MMM d, yyyy');
+    console.log('pet DOB is: ', this.petDobString);
   }
 
   modalArrivalDateChanged(value) {
