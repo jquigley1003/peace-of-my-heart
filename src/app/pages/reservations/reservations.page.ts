@@ -4,7 +4,7 @@ import { IonDatetime } from '@ionic/angular';
 
 import { format, parseISO } from 'date-fns';
 import { Timestamp } from 'firebase/firestore';
-import { Subject } from 'rxjs';
+import { Subject, VirtualTimeScheduler } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Pet } from 'src/app/shared/models/pet.model';
 
@@ -22,6 +22,9 @@ export class ReservationsPage implements OnInit, OnDestroy {
   petHeader: string;
   boardingResForm: FormGroup;
   petDobString = '';
+  petRabiesString = '';
+  petDhppString = '';
+  petBordetellaString = '';
   dateArrivalString = '';
   dateArrivalValue = format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z';
   dateDepartureString = '';
@@ -274,10 +277,13 @@ export class ReservationsPage implements OnInit, OnDestroy {
 
   }
 
-  addPets() {
+  async addPets() {
     this.clientPets.forEach(pet => {
       console.log('addPets result: ', pet);
       this.getPetDob(pet.petDob);
+      this.getPetRabies(pet.petRabiesDate);
+      this.getPetDhpp(pet.petDhppDate);
+      this.getPetBordetella(pet.petBordetellaDate);
       const petForm = this.formBuilder.group({
         petHeader: [pet.petName],
         petName: [pet.petName, Validators.required],
@@ -286,7 +292,17 @@ export class ReservationsPage implements OnInit, OnDestroy {
         petSpayNeuter: [pet.petSpayNeuter, Validators.required],
         petDob: [this.petDobString, Validators.required],
         petWeight: [pet.petWeight, Validators.required],
-        petHair: [pet.petHair, Validators.required]
+        petHair: [pet.petHair, Validators.required],
+        petRabiesDate: [this.petRabiesString],
+        petRabiesType: [pet.petRabiesType],
+        petDhppDate: [this.petDhppString],
+        petDhppType: [pet.petDhppType],
+        petBordetellaDate: [this.petBordetellaString],
+        petFleaControl: [pet.petFleaControl],
+        petFood: [pet.petFood, Validators.required],
+        petMeds: [pet.petMeds],
+        petFoodInfo: [pet.petFoodInfo, Validators.required],
+        petMedInfo: [pet.petMedInfo, Validators.required]
       });
       this.pets.push(petForm);
     });
@@ -303,6 +319,24 @@ export class ReservationsPage implements OnInit, OnDestroy {
     const petDob = new Timestamp(value.seconds , value.nanoseconds).toDate().toISOString();
     this.petDobString = format(parseISO(petDob), 'MMM d, yyyy');
     console.log('pet DOB is: ', this.petDobString);
+  }
+
+  getPetRabies(value) {
+    const petRabies = new Timestamp(value.seconds , value.nanoseconds).toDate().toISOString();
+    this.petRabiesString = format(parseISO(petRabies), 'MMM d, yyyy');
+    console.log('pet Rabies Date is: ', this.petRabiesString);
+  }
+
+  getPetDhpp(value) {
+    const petDhpp = new Timestamp(value.seconds , value.nanoseconds).toDate().toISOString();
+    this.petDhppString = format(parseISO(petDhpp), 'MMM d, yyyy');
+    console.log('pet Dhpp Date is: ', this.petDhppString);
+  }
+
+  getPetBordetella(value) {
+    const petBordetella = new Timestamp(value.seconds , value.nanoseconds).toDate().toISOString();
+    this.petBordetellaString = format(parseISO(petBordetella), 'MMM d, yyyy');
+    console.log('pet Bordetella Date is: ', this.petBordetellaString);
   }
 
   modalArrivalDateChanged(value) {
@@ -396,9 +430,9 @@ export class ReservationsPage implements OnInit, OnDestroy {
     console.log('Getting DHPP Type from form: ', testPet1DhppType);
   }
 
-  selectFleaControl(event) {
-    const testPet1FleaControl = this.boardingResForm.value.pet1FleaControl;
-    console.log('Getting value from form: ', testPet1FleaControl);
+  selectFleaControl(event, petFleaControl) {
+    const testPetFleaControl = petFleaControl;
+    console.log(`Getting ${testPetFleaControl} from form: `, event.detail.value);
   }
 
   selectFood(event) {
