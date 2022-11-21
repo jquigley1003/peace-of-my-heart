@@ -33,8 +33,6 @@ export class ReservationsPage implements OnInit, OnDestroy {
   showClient = false;
   showVet = false;
   showPets = false;
-  showPet1 = false;
-  showPet2 = false;
   showRes = false;
   showAddServices = true;
   showRefresh = false;
@@ -73,43 +71,6 @@ export class ReservationsPage implements OnInit, OnDestroy {
       vetEmail: [''],
       vetVaccinesFiled: [''],
       pets: this.formBuilder.array([]),
-      // pets: new FormControl('', Validators.required),
-      pet1Name: ['', Validators.required],
-      pet1Breed: ['', Validators.required],
-      pet1Sex: ['', Validators.required],
-      pet1Dob: ['', Validators.required],
-      pet1Weight: ['', Validators.required],
-      pet1Hair: [''],
-      pet1SpayNeuter: ['', Validators.required],
-      pet1RabiesDate: [''],
-      pet1RabiesType: ['1 year'],
-      pet1DhppDate: [''],
-      pet1DhppType: ['1 year'],
-      pet1BordetellaDate: [''],
-      pet1FleaControl: [''],
-      pet1Food: ['', Validators.required],
-      pet1Meds: ['false'],
-      pet1FoodInfo: ['', Validators.required],
-      pet1MedInfo: ['None', Validators.required],
-
-      pet2Name: [''],
-      pet2Breed: [''],
-      pet2Sex: [''],
-      pet2Dob: [''],
-      pet2Weight: [''],
-      pet2Hair: [''],
-      pet2SpayNeuter: [''],
-      pet2RabiesDate: [''],
-      pet2RabiesType: ['1 year'],
-      pet2DhppDate: [''],
-      pet2DhppType: ['1 year'],
-      pet2BordetellaDate: [''],
-      pet2FleaControl: [''],
-      pet2Food: ['true'],
-      pet2Meds: ['false'],
-      pet2FoodInfo: [''],
-      pet2MedInfo: ['None'],
-
       arrivalDate: ['', Validators.required],
       arrivalPickup: ['false'],
       departureDate: ['', Validators.required],
@@ -196,42 +157,6 @@ export class ReservationsPage implements OnInit, OnDestroy {
 
   get pets(){
     return this.boardingResForm.controls.pets as FormArray;
-  }
-
-  get pet1Name() {
-    return this.boardingResForm.get('pet1Name');
-  }
-
-  get pet1Breed() {
-    return this.boardingResForm.get('pet1Breed');
-  }
-
-  get pet1Sex() {
-    return this.boardingResForm.get('pet1Sex');
-  }
-
-  get pet1SpayNeuter() {
-    return this.boardingResForm.get('pet1SpayNeuter');
-  }
-
-  get pet1Dob() {
-    return this.boardingResForm.get('pet1Dob');
-  }
-
-  get pet1Weight() {
-    return this.boardingResForm.get('pet1Weight');
-  }
-
-  get pet1Food() {
-    return this.boardingResForm.get('pet1Food');
-  }
-
-  get pet1FoodInfo() {
-    return this.boardingResForm.get('pet1FoodInfo');
-  }
-
-  get pet1MedInfo() {
-    return this.boardingResForm.get('pet1MedInfo');
   }
 
   get arrivalDate() {
@@ -371,14 +296,6 @@ export class ReservationsPage implements OnInit, OnDestroy {
 
   toggleShowPetInfo() {
     this.showPets = !this.showPets;
-  }
-
-  toggleShowPet1() {
-    this.showPet1 = !this.showPet1;
-  }
-
-  toggleShowPet2() {
-    this.showPet2 = !this.showPet2;
   }
 
   toggleShowResInfo() {
