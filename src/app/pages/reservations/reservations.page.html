@@ -13,7 +13,18 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row>
+    <ion-row *ngIf="!signedIn">
+      <ion-col class="ion-text-center">
+        <h1>Please sign-in to make a reservation</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="signedIn && !activeCustomer">
+      <ion-col>
+        <h1>You must be an active customer to place a reservation. 
+          Please contact Stephen Walters at 404-547-7329</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="signedIn && activeCustomer">
       <ion-col>
         <div class="welcome-container">
           <h1>

@@ -4,11 +4,12 @@ import { IonDatetime } from '@ionic/angular';
 
 import { format, parseISO } from 'date-fns';
 import { Timestamp } from 'firebase/firestore';
-import { Subject, VirtualTimeScheduler } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { subscribeOn, takeUntil } from 'rxjs/operators';
 import { Pet } from 'src/app/shared/models/pet.model';
 
 import { PetService } from 'src/app/shared/pet/pet.service';
+import { AuthService } from 'src/app/shared/auth/auth.service';
 
 @Component({
   selector: 'app-reservations',
@@ -17,6 +18,8 @@ import { PetService } from 'src/app/shared/pet/pet.service';
 })
 export class ReservationsPage implements OnInit, OnDestroy {
   @ViewChild (IonDatetime) ionDatetime: IonDatetime;
+  signedIn: boolean;
+  activeCustomer: boolean;
   ngUnsubscribe = new Subject<void>();
   clientPets: Pet[] = [];
   petHeader: string;
@@ -34,7 +37,7 @@ export class ReservationsPage implements OnInit, OnDestroy {
   showVet = false;
   showPets = false;
   showRes = false;
-  showAddServices = true;
+  showAddServices = false;
   showRefresh = false;
   vaccinesFiled: boolean;
   consentFormFiled: boolean;
@@ -48,7 +51,8 @@ export class ReservationsPage implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
-    private petService: PetService
+    private petService: PetService,
+    private authService: AuthService
   ) {
     this.boardingResForm = this.formBuilder.group({
       clientFirstName: ['', Validators.required],
@@ -171,6 +175,7 @@ export class ReservationsPage implements OnInit, OnDestroy {
     this.vaccinesFiled = true;
     this.setToday();
     this.initializeUserPets();
+    this.initializeUser();
   }
 
 
@@ -186,6 +191,22 @@ export class ReservationsPage implements OnInit, OnDestroy {
   //   this.showPicker = false;
   // }
 
+  initializeUser() {
+    this.authService.getCurrentUserData()
+    .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(data => {
+        if (data) {
+          this.signedIn = !!data;
+          this.activeCustomer = data.roles.active;
+          console.log('reservation user is: ', data);
+        } else {
+          this.signedIn = false;
+          this.activeCustomer = false;
+          console.log('reservation user is: ', data);
+        }
+      });
+  }
+
   async initializeUserPets() {
     if (this.clientPets === null || this.clientPets.length === 0) {
       this.petService.getUserPets()
@@ -193,7 +214,7 @@ export class ReservationsPage implements OnInit, OnDestroy {
         .subscribe(data => {
           this.clientPets = data;
           this.addPets();
-          console.log('clientPets in initializeUserPets: ', this.clientPets);
+          // console.log('clientPets in initializeUserPets: ', this.clientPets);
         });
     } else {
       this.showRefresh = false;
@@ -204,7 +225,7 @@ export class ReservationsPage implements OnInit, OnDestroy {
 
   async addPets() {
     this.clientPets.forEach(pet => {
-      console.log('addPets result: ', pet);
+      // console.log('addPets result: ', pet);
       this.getPetDob(pet.petDob);
       this.getPetRabies(pet.petRabiesDate);
       this.getPetDhpp(pet.petDhppDate);
@@ -243,25 +264,25 @@ export class ReservationsPage implements OnInit, OnDestroy {
   getPetDob(value) {
     const petDob = new Timestamp(value.seconds , value.nanoseconds).toDate().toISOString();
     this.petDobString = format(parseISO(petDob), 'MMM d, yyyy');
-    console.log('pet DOB is: ', this.petDobString);
+    // console.log('pet DOB is: ', this.petDobString);
   }
 
   getPetRabies(value) {
     const petRabies = new Timestamp(value.seconds , value.nanoseconds).toDate().toISOString();
     this.petRabiesString = format(parseISO(petRabies), 'MMM d, yyyy');
-    console.log('pet Rabies Date is: ', this.petRabiesString);
+    // console.log('pet Rabies Date is: ', this.petRabiesString);
   }
 
   getPetDhpp(value) {
     const petDhpp = new Timestamp(value.seconds , value.nanoseconds).toDate().toISOString();
     this.petDhppString = format(parseISO(petDhpp), 'MMM d, yyyy');
-    console.log('pet Dhpp Date is: ', this.petDhppString);
+    // console.log('pet Dhpp Date is: ', this.petDhppString);
   }
 
   getPetBordetella(value) {
     const petBordetella = new Timestamp(value.seconds , value.nanoseconds).toDate().toISOString();
     this.petBordetellaString = format(parseISO(petBordetella), 'MMM d, yyyy');
-    console.log('pet Bordetella Date is: ', this.petBordetellaString);
+    // console.log('pet Bordetella Date is: ', this.petBordetellaString);
   }
 
   modalArrivalDateChanged(value) {
