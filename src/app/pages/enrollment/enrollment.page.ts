@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { Timestamp } from 'firebase/firestore';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -9,9 +10,9 @@ import { format, parseISO } from 'date-fns';
 import { User } from 'src/app/shared/models/user.model';
 import { Pet } from 'src/app/shared/models/pet.model';
 import { SignInModalComponent } from 'src/app/shared/components/sign-in-modal/sign-in-modal.component';
+import { PetModalComponent } from 'src/app/shared/modals/pet-modal/pet-modal.component';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 import { PetService } from 'src/app/shared/pet/pet.service';
-import { Timestamp } from 'firebase/firestore';
 
 @Component({
   selector: 'app-enrollment',
@@ -217,6 +218,16 @@ export class EnrollmentPage implements OnInit, OnDestroy {
 
   updatePet(pet) {
     this.petService.updatePet(pet);
+  }
+
+  async presentPetModal(pet) {
+    const modal = await this.modalCtrl.create({
+      component: PetModalComponent,
+      componentProps: {
+        pet
+      }
+    });
+    return await modal.present();
   }
 
   async presentSignInModal() {
