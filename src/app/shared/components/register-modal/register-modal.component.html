@@ -79,10 +79,10 @@
         <ion-checkbox (ionChange)="onCheckEvent($event)" mode="ios"></ion-checkbox>
         <ion-text>
           I agree with the
-          <a href="https://ionicblocks.com/" target="_blank">
+          <a (click)="goToTerms()">
             <span class="link">terms and conditions</span></a>
           and
-          <a href="https://ionicblocks.com/" target="_blank">
+          <a (click)="goToPrivacy()">
             <span class="link">privacy policy</span></a>
           of the website and I accept them.
         </ion-text>

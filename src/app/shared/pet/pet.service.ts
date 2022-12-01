@@ -35,15 +35,22 @@ export class PetService implements OnDestroy {
     this.unsubscribePets = onSnapshot(q, (querySnapshot) => {
       const pets = [];
       querySnapshot.forEach((petInfo) => {
-          pets.push(petInfo.data());
+          pets.push({
+            ...petInfo.data(),
+            petId: petInfo.id
+          });
       });
       this.userPets$.next(pets);
-      // console.log('Pets: ', pets);
+      console.log('Pets: ', pets);
     });
   }
 
   getUserPets() {
     return this.userPets$.asObservable();
+  }
+
+  updatePet(pet) {
+    
   }
 
   async stopSubscribing() {

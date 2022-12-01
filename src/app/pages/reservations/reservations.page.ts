@@ -1,15 +1,16 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { IonDatetime } from '@ionic/angular';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IonDatetime, ModalController } from '@ionic/angular';
 
 import { format, parseISO } from 'date-fns';
 import { Timestamp } from 'firebase/firestore';
 import { Subject } from 'rxjs';
-import { subscribeOn, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Pet } from 'src/app/shared/models/pet.model';
 
 import { PetService } from 'src/app/shared/pet/pet.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
+import { SignInModalComponent } from 'src/app/shared/components/sign-in-modal/sign-in-modal.component';
 
 @Component({
   selector: 'app-reservations',
@@ -52,7 +53,8 @@ export class ReservationsPage implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private petService: PetService,
-    private authService: AuthService
+    private authService: AuthService,
+    private modalCtrl: ModalController
   ) {
     this.boardingResForm = this.formBuilder.group({
       clientFirstName: ['', Validators.required],
@@ -97,7 +99,7 @@ export class ReservationsPage implements OnInit, OnDestroy {
       iceCreamCups: ['false'],
       howManyIceCreamCups: ['0']
     });
-   }
+  }
 
   get clientFirstName() {
     return this.boardingResForm.get('clientFirstName');
@@ -178,18 +180,10 @@ export class ReservationsPage implements OnInit, OnDestroy {
     this.initializeUser();
   }
 
-
-
   setToday() {
     this.dateArrivalString = format(parseISO(format(new Date(), 'yyyy-MM-dd') + 'T00:00:00.000Z'), 'h:mm a, MMM d, yyyy');
     this.dateDepartureString = format(parseISO(format(new Date(), 'yyyy-MM-dd') + 'T00:00:00.000Z'), 'h:mm a, MMM d, yyyy');
   }
-
-  // async dateChanged(value) {
-  //   this.dateArrivalValue = value;
-  //   this.dateArrivalString = format(parseISO(value), 'h:mm a, MMM d, yyyy');
-  //   this.showPicker = false;
-  // }
 
   initializeUser() {
     this.authService.getCurrentUserData()
@@ -198,11 +192,11 @@ export class ReservationsPage implements OnInit, OnDestroy {
         if (data) {
           this.signedIn = !!data;
           this.activeCustomer = data.roles.active;
-          console.log('reservation user is: ', data);
+          // console.log('reservation user is: ', data);
         } else {
           this.signedIn = false;
           this.activeCustomer = false;
-          console.log('reservation user is: ', data);
+          // console.log('reservation user is: ', data);
         }
       });
   }
@@ -453,9 +447,16 @@ export class ReservationsPage implements OnInit, OnDestroy {
     console.log('Form submitted: ', this.boardingResForm.value);
   }
 
+  async presentSignInModal() {
+    const modal = await this.modalCtrl.create({
+      component: SignInModalComponent,
+      componentProps: {}
+    });
+    return await modal.present();
+  }
+
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
-
 }

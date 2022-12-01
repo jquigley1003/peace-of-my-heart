@@ -8,6 +8,7 @@ import { ReservationsPageRoutingModule } from './reservations-routing.module';
 
 import { ReservationsPage } from './reservations.page';
 import { FooterModule } from 'src/app/shared/components/footer/footer.module';
+import { SignInModalModule } from 'src/app/shared/components/sign-in-modal/sign-in-modal.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { FooterModule } from 'src/app/shared/components/footer/footer.module';
     ReactiveFormsModule,
     IonicModule,
     ReservationsPageRoutingModule,
-    FooterModule
+    FooterModule,
+    SignInModalModule
   ],
   declarations: [ReservationsPage]
 })

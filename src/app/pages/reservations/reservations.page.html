@@ -14,8 +14,13 @@
 <ion-content>
   <ion-grid>
     <ion-row *ngIf="!signedIn">
-      <ion-col class="ion-text-center">
+      <ion-col size="12" class="ion-text-center">
         <h1>Please sign-in to make a reservation</h1>
+      </ion-col>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button color="secondary" (click)="presentSignInModal()">
+          Sign In<ion-icon slot="start" name="log-in-outline"></ion-icon>
+        </ion-button>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="signedIn && !activeCustomer">

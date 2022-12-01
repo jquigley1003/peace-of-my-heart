@@ -85,6 +85,16 @@ export class RegisterModalComponent implements OnInit {
     await this.modalCtrl.dismiss();
   }
 
+  async goToTerms() {
+    await this.router.navigate(['/home']);
+    this.modalCtrl.dismiss();
+  }
+
+  async goToPrivacy() {
+    await this.router.navigate(['/home']);
+    this.modalCtrl.dismiss();
+  }
+
   onCheckEvent(event){
     if(event.detail.checked) {
       this.termsChecked = true;

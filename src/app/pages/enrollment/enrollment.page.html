@@ -13,9 +13,668 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row>
+    <ion-row *ngIf="!signedIn">
+      <ion-col size="12" class="ion-text-center">
+        <h1>Please sign-in to begin enrollment<br>or to make changes on your enrollment form.</h1>
+      </ion-col>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button color="secondary" (click)="presentSignInModal()">
+          Sign In<ion-icon slot="start" name="log-in-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="signedIn">
       <ion-col>
+        <div class="welcome-container">
+          <h1>
+            Enrollment Form
+          </h1>
+          <h2>All fields with an asterisk <span class="required-field">*</span> are required. A green checkmark 
+            <ion-icon color="success" name="checkmark-circle-outline"></ion-icon> will appear next to each section that meet requirements.</h2>
+          <h2>Show or hide sections by clicking the <ion-icon name="caret-down-circle-outline"></ion-icon> or 
+            <ion-icon name="caret-up-circle-outline"></ion-icon> buttons.</h2>
+        </div>
+        <!-- form -->
+        <form class="form-container" [formGroup]="enrollmentForm" (ngSubmit)="onSubmitForm()">
+          <ion-row>
+            <ion-col size="12" class="ion-align-items-center section-header">
+              <div class="section-title" (click)="toggleShowClientInfo()">
+                <ion-icon color="success" *ngIf="clientFirstName.valid && clientLastName.valid && 
+                  clientStreet.valid && clientCity.valid && clientState.valid && 
+                  clientZip.valid && clientEmail.valid && clientPhone1.valid &&
+                  emergencyName1.valid && emergencyPhone1.valid" name="checkmark-circle-outline"></ion-icon>
+                <div class="icon-container-header">
+                  <ion-icon name="person-outline"></ion-icon>
+                </div>
+                <h1>CLIENT INFORMATION</h1>
+                <ion-button class="show-hide" size="small" shape="round">
+                  <ion-icon *ngIf="showClient" name="caret-down-circle-outline"></ion-icon>
+                  <ion-icon *ngIf="!showClient" name="caret-up-circle-outline"></ion-icon>
+                </ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row #clientNames *ngIf="showClient">
+            <ion-col>
+              <ion-item lines="none">
+                <div class="input-container">
+                  <!-- <div class="icon-container">
+                    <ion-icon name="person-outline"></ion-icon>
+                  </div> -->
+                  <div class="input">
+                    <ion-label position="floating">Client First Name <span class="required-field">*</span></ion-label>
+                    <ion-input type="text" formControlName="clientFirstName" placeholder="Jane" required="true"></ion-input>
+                  </div>
+                  <div *ngIf="(clientFirstName.dirty || clientFirstName.touched) && clientFirstName.errors" class="form-errors">
+                    <span *ngIf="clientFirstName.errors?.required">Client's first name is required</span>
+                  </div>
+                </div>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item lines="none">
+                <div class="input-container">
+                  <!-- <div class="icon-container">
+                    <ion-icon name="briefcase-outline"></ion-icon>
+                  </div> -->
+                  <div class="input">
+                    <ion-label position="floating">Client Last Name <span class="required-field">*</span></ion-label>
+                    <ion-input type="text" formControlName="clientLastName" placeholder="Doe" required="true"></ion-input>
+                  </div>
+                  <div *ngIf="(clientLastName.dirty || clientLastName.touched) && clientLastName.errors" class="form-errors">
+                    <span *ngIf="clientLastName.errors?.required">Client's last name is required</span>
+                  </div>
+                </div>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item lines="none">
+                <div class="input-container">
+                  <div class="input">
+                    <ion-label position="floating">Spouse/Partner Name</ion-label>
+                    <ion-input type="text" formControlName="clientSpousePartner" placeholder="John Doe"></ion-input>
+                  </div>
+                </div>
+              </ion-item>
+            </ion-col>
+          </ion-row><!-- End of Client Names -->
+          <ion-row #clientAddress *ngIf="showClient">
+            <ion-col size="12">
+              <h4>Address</h4>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item lines="none">
+                <div class="input-container">
+                  <div class="input">
+                    <ion-label position="floating">Street <span class="required-field">*</span></ion-label>
+                    <ion-input type="text" formControlName="clientStreet" placeholder="123 Some Street" required="true"></ion-input>
+                  </div>
+                  <div *ngIf="(clientStreet.dirty || clientStreet.touched) && clientStreet.errors" class="form-errors">
+                    <span *ngIf="clientStreet.errors?.required">Street name is required</span>
+                  </div>
+                </div>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item lines="none">
+                <div class="input-container">
+                  <div class="input">
+                    <ion-label position="floating">City <span class="required-field">*</span></ion-label>
+                    <ion-input type="text" formControlName="clientCity" placeholder="Atlanta" required="true"></ion-input>
+                  </div>
+                  <div *ngIf="(clientCity.dirty || clientCity.touched) && clientCity.errors" class="form-errors">
+                    <span *ngIf="clientCity.errors?.required">City is required</span>
+                  </div>
+                </div>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item lines="none">
+                <div class="input-container">
+                  <div class="input">
+                    <ion-label position="floating">State <span class="required-field">*</span></ion-label>
+                    <ion-input type="text" formControlName="clientState" placeholder="GA" required="true"></ion-input>
+                  </div>
+                  <div *ngIf="(clientState.dirty || clientState.touched) && clientState.errors" class="form-errors">
+                    <span *ngIf="clientState.errors?.required">State is required</span>
+                  </div>
+                </div>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item lines="none">
+                <div class="input-container">
+                  <div class="input">
+                    <ion-label position="floating">Zip Code<span class="required-field">*</span></ion-label>
+                    <ion-input type="text" formControlName="clientZip" placeholder="30309" required="true"></ion-input>
+                  </div>
+                  <div *ngIf="(clientZip.dirty || clientZip.touched) && clientZip.errors" class="form-errors">
+                    <span *ngIf="clientZip.errors?.required">Zip code is required</span>
+                  </div>
+                </div>
+              </ion-item>
+            </ion-col>
+          </ion-row><!-- End of Client Address -->
+          <ion-row #clientEmailPhone *ngIf="showClient">
+            <ion-col size="12">
+              <h4>Contact Info</h4>
+            </ion-col>
+            <ion-col>
+              <ion-item lines="none">
+                <div class="input-container">
+                  <div class="input">
+                    <ion-label position="floating">Email<span class="required-field">*</span></ion-label>
+                    <ion-input type="email" formControlName="clientEmail" placeholder="youremail@gmail.com" required="true"></ion-input>
+                  </div>
+                  <div *ngIf="(clientEmail.dirty || clientEmail.touched) && clientEmail.errors" class="form-errors">
+                    <span *ngIf="clientEmail.errors?.required">Email is required</span>
+                    <span *ngIf="clientEmail.errors?.pattern">Valid email format required (use lowercase)</span>
+                  </div>
+                </div>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item lines="none">
+                <div class="input-container">
+                  <div class="input">
+                    <ion-label position="floating">Phone<span class="required-field">*</span></ion-label>
+                    <ion-input type="tel" (keyup)="addHyphens($event)" formControlName="clientPhone1" placeholder="404-555-5555" required="true"></ion-input>
+                  </div>
+                  <div *ngIf="(clientPhone1.dirty || clientPhone1.touched) && clientPhone1.errors" class="form-errors">
+                    <span *ngIf="clientPhone1.errors?.required">Phone number is required</span>
+                    <span *ngIf="clientPhone1.errors?.pattern">10 numbers: Hyphens added automatically</span>
+                  </div>
+                </div>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item lines="none">
+                <div class="input-container">
+                  <div class="input">
+                    <ion-label position="floating">Alternate Phone</ion-label>
+                    <ion-input type="tel" (keyup)="addHyphens($event)" formControlName="clientPhone2" placeholder="404-555-5555"></ion-input>
+                  </div>
+                  <div *ngIf="(clientPhone2.dirty || clientPhone2.touched) && clientPhone2.errors" class="form-errors">
+                    <span *ngIf="clientPhone2.errors?.pattern">10 numbers: Hyphens added automatically</span>
+                  </div>
+                </div>
+              </ion-item>
+            </ion-col>
+          </ion-row><!-- End of Client Email Phone -->
+          <ion-row #emergencyContactInfo *ngIf="showClient">
+            <ion-col size="12">
+              <h4>Emergency Contact Info</h4>
+              <p class="more-info">NOTE: In the event of an emergency and your pet is in need of veterinarian care, including but not limited 
+                to surgery, an Emergency Contact is the only person other than yourself that can authorize to proceed with 
+                necessary procedure. A POMH representative <b>WILL NOT</b> be permitted to provide authorization. 
+                If your provided Emergency Contact is not reachable, most vet practices will not proceed. However, to avoid this from happening, 
+                you may list me (Stephen Walters 404-547-7329) as an Emergency Contact.</p>
+            </ion-col>
+            <ion-col size="12" #firstEmergencyContact>
+              <ion-row>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">First Emergency Contact Name<span class="required-field">*</span></ion-label>
+                        <ion-input type="text" formControlName="emergencyName1" placeholder="Heidi Klum" required="true"></ion-input>
+                      </div>
+                      <div *ngIf="(emergencyName1.dirty || emergencyName1.touched) && emergencyName1.errors" class="form-errors">
+                        <span *ngIf="emergencyName1.errors?.required">Emergency contact name is required</span>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">First Emergency Contact Phone<span class="required-field">*</span></ion-label>
+                        <ion-input type="tel" (keyup)="addHyphens($event)" formControlName="emergencyPhone1" placeholder="404-555-5555" required="true"></ion-input>
+                      </div>
+                      <div *ngIf="(emergencyPhone1.dirty || emergencyPhone1.touched) && emergencyPhone1.errors" class="form-errors">
+                        <span *ngIf="emergencyPhone1.errors?.required">Emergency contact phone number is required</span>
+                        <span *ngIf="emergencyPhone1.errors?.pattern">10 numbers: Hyphens added automatically</span>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col size="12" #secondEmergencyContact>
+              <ion-row>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Second Emergency Contact Name</ion-label>
+                        <ion-input type="text" formControlName="emergencyName2" placeholder="Stephen Walter"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Second Emergency Contact Phone</ion-label>
+                        <ion-input type="tel" (keyup)="addHyphens($event)" formControlName="emergencyPhone2" placeholder="404-555-5555"></ion-input>
+                      </div>
+                      <div *ngIf="(emergencyPhone2.dirty || emergencyPhone2.touched) && emergencyPhone2.errors" class="form-errors">
+                        <span *ngIf="emergencyPhone2.errors?.pattern">10 numbers: Hyphens added automatically</span>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col size-xs="12">
+              <ion-item lines="none">
+                <div class="input-container">
+                  <div class="input">
+                    <ion-label position="floating" class="ion-text-wrap">Maximum dollar amount your Emergency Contact is authorized 
+                      to approve per pet<span class="required-field">*</span></ion-label>
+                    <ion-input type="number" formControlName="emergencyMaxAmount" placeholder="1000" required="true"></ion-input>
+                  </div>
+                  <div *ngIf="(emergencyMaxAmount.dirty || emergencyMaxAmount.touched) && emergencyMaxAmount.errors" class="form-errors">
+                    <span *ngIf="emergencyMaxAmount.errors?.required">Emergency maximum dollar amount is required</span>
+                  </div>
+                </div>
+              </ion-item>
+            </ion-col><!-- End of Emergency Contact Info -->
+          </ion-row>
+          <!-- END OF CLIENT INFORMATION SECTION -->
+          <ion-row>
+            <ion-col size="12" class="ion-align-items-center section-header">
+              <div class="section-title" (click)="toggleShowVetInfo()">
+                <ion-icon color="success" *ngIf="vetName.valid && vetPhone.valid" name="checkmark-circle-outline"></ion-icon>
+                <div class="icon-container-header">
+                  <ion-icon name="storefront-outline"></ion-icon>
+                </div>
+                <h1>VET INFORMATION</h1>
+                <ion-button class="show-hide" size="small" shape="round">
+                  <ion-icon *ngIf="showVet" name="caret-down-circle-outline"></ion-icon>
+                  <ion-icon *ngIf="!showVet" name="caret-up-circle-outline"></ion-icon>
+                </ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row #vetInformation *ngIf="showVet">
+            <ion-col>
+              <ion-item lines="none">
+                <div class="input-container">
+                  <div class="input">
+                    <ion-label position="floating">Vetinarian - Name of Practice<span class="required-field">*</span></ion-label>
+                    <ion-input type="text" formControlName="vetName" placeholder="Atlanta Vetinarian" required="true"></ion-input>
+                  </div>
+                  <div *ngIf="(vetName.dirty || vetName.touched) && vetName.errors" class="form-errors">
+                    <span *ngIf="vetName.errors?.required">Vet Practice Name is required</span>
+                  </div>
+                </div>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item lines="none">
+                <div class="input-container">
+                  <div class="input">
+                    <ion-label position="floating">Vet Phone<span class="required-field">*</span></ion-label>
+                    <ion-input type="tel" (keyup)="addHyphens($event)" formControlName="vetPhone" placeholder="404-555-5555" required="true"></ion-input>
+                  </div>
+                  <div *ngIf="(vetPhone.dirty || vetPhone.touched) && vetPhone.errors" class="form-errors">
+                    <span *ngIf="vetPhone.errors?.required">Phone number is required</span>
+                    <span *ngIf="vetPhone.errors?.pattern">10 numbers: Hyphens added automatically</span>
+                  </div>
+                </div>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item lines="none">
+                <div class="input-container">
+                  <div class="input">
+                    <ion-label position="floating">Vet Email</ion-label>
+                    <ion-input type="email" formControlName="vetEmail" placeholder="vetEmail@gmail.com"></ion-input>
+                  </div>
+                </div>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12">
+              <h4>Vaccinations on File</h4>
+              <ion-item>
+                <ion-checkbox slot="start" formControlName="vetVaccinesFiled" checked="{{vaccinesFiled}}" value="{{vaccinesFiled}}" 
+                (ionChange)="selectVaccinesFiled($event)"></ion-checkbox>
+                <p class="more-info">Check here if vaccines are on file with Peace of My Heart. If they are current 
+                  and already on file with POMH, you do not need to fill out vaccine information for your pet, except when your 
+                  pets have received their boosters. <span class="emphasize">NOTE: If booster or initial vaccines have 
+                  been given to your pet within 10 days of arrival date, your pet will not be permitted to board here.</span>
+                </p>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <!-- END OF VET INFORMATION SECTION -->
+          <ion-row>
+            <ion-col size="12" class="ion-align-items-center section-header">
+              <div class="section-title" (click)="toggleShowPetInfo()">
+                <ion-icon color="success" *ngIf="this.enrollmentForm.controls.pets.valid" name="checkmark-circle-outline"></ion-icon>
+                <div class="icon-container-header">
+                  <ion-icon name="paw-outline"></ion-icon>
+                </div>
+                <h1>PET INFORMATION</h1>
+                <ion-button class="show-hide" size="small" shape="round">
+                  <ion-icon *ngIf="showPets" name="caret-down-circle-outline"></ion-icon>
+                  <ion-icon *ngIf="!showPets" name="caret-up-circle-outline"></ion-icon>
+                </ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+          <!-- Get client pets from database -->
+          <ion-row>
+            <ion-col size="12" *ngFor="let pet of clientPets">
+              <h1>{{ pet.petName }}</h1>
+              <p>{{ pet.petParentId }}</p>
+              <p>PetId = {{ pet.petId }}</p>
+              <ion-button (click)="updatePet(pet)"></ion-button>
 
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="showPets" formArrayName="pets">
+
+            <ion-col size="12" *ngFor="let pet of pets.controls; let i = index" class="pet-container">
+              <ion-row #pet1Identification>
+                <ion-col size="12">
+                  <ion-toolbar color="primary">
+                    <ion-title color="secondary">Pet {{ i+1 }}</ion-title>
+                    <ion-buttons slot="end">
+                      <ion-button color="secondary" (click)="removePet(i)">
+                        <ion-icon slot="start" name="close-circle-outline"></ion-icon>Remove from Reservation</ion-button>
+                    </ion-buttons>
+                  </ion-toolbar>
+                </ion-col>
+                <!-- Beginning of Pet Identificaton -->
+                <ion-col size="12">
+                  <h4>Pet {{ i+1 }} Identification</h4>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none" [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Pet Name<span class="required-field">*</span></ion-label>
+                        <ion-input type="text" formControlName="petName" placeholder="Cardiff" required="true"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none" [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Breed <span class="required-field">*</span></ion-label>
+                        <ion-input type="text" formControlName="petBreed" placeholder="Weimaraner" required="true"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label class="ion-text-wrap" >Sex <span class="required-field">*</span></ion-label>
+                      </div>
+                      <div class="input">
+                        <ion-radio-group formControlName="petSex" (ionChange)="selectSex($event, 'pet'+(i+1))">
+                          <ion-row>
+                            <ion-col>
+                              <ion-label class="ion-text-wrap">Male</ion-label>
+                              <ion-radio value="male" color="primary"></ion-radio>
+                            </ion-col>
+                            <ion-col>
+                              <ion-label class="ion-text-wrap">Female</ion-label>
+                              <ion-radio value="female" color="primary"></ion-radio>
+                            </ion-col>
+                          </ion-row>
+                        </ion-radio-group>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label class="ion-text-wrap" >Spayed/Neutered? <span class="required-field">*</span></ion-label>
+                      </div>
+                      <div class="input">
+                        <ion-radio-group formControlName="petSpayNeuter" (ionChange)="selectSpayedNeutered($event, 'pet'+(i+1))">
+                          <ion-row>
+                            <ion-col>
+                              <ion-label class="ion-text-wrap">Yes</ion-label>
+                              <ion-radio value="yes" color="primary"></ion-radio>
+                            </ion-col>
+                            <ion-col>
+                              <ion-label class="ion-text-wrap">No</ion-label>
+                              <ion-radio value="no" color="primary"></ion-radio>
+                            </ion-col>
+                          </ion-row>
+                        </ion-radio-group>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item lines="none" [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">DOB <span class="required-field">*</span></ion-label>
+                        <ion-input type="date" formControlName="petDob" placeholder="11/20/20" required="true"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item lines="none" [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Weight (lbs) <span class="required-field">*</span></ion-label>
+                        <ion-input type="text" formControlName="petWeight" placeholder="55" required="true"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item lines="none" [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Coat Type</ion-label>
+                        <ion-input type="text" formControlName="petHair" placeholder="short or long hair"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <!-- End of Pet Identificaton -->
+                <!-- Beginning of Pet Vaccine Information -->
+                <ion-col size="12">
+                  <h4>Pet {{ i+1 }} Vaccine Info</h4>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none" [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Rabies</ion-label>
+                        <ion-input type="text" formControlName="petRabiesDate"></ion-input>
+                      </div>
+                      <div class="input">
+                        <ion-radio-group formControlName="petRabiesType" (ionChange)="selectRabiesYear($event)">
+                          <ion-row>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">1 Year</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value="1 year" color="primary"></ion-radio>
+                            </ion-col>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">3 Year</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value="3 year" color="primary"></ion-radio>
+                            </ion-col>
+                          </ion-row>
+                        </ion-radio-group>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none" [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">DHPP</ion-label>
+                        <ion-input type="text" formControlName="petDhppDate"></ion-input>
+                      </div>
+                      <div class="input">
+                        <ion-radio-group formControlName="petDhppType" (ionChange)="selectDhppYear($event)">
+                          <ion-row>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">1 Year</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value="1 year" color="primary"></ion-radio>
+                            </ion-col>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">3 Year</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value="3 year" color="primary"></ion-radio>
+                            </ion-col>
+                          </ion-row>
+                        </ion-radio-group>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item lines="none" [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Bordetella</ion-label>
+                        <ion-input type="text" formControlName="petBordetellaDate"></ion-input>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item lines="none" [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label class="ion-text-wrap">Flea Control?</ion-label>
+                      </div>
+                      <div class="input">
+                        <ion-radio-group formControlName="petFleaControl" (ionChange)="selectFleaControl($event, 'pet'+(i+1))">
+                          <ion-row>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">Yes</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value="yes" color="primary"></ion-radio>
+                            </ion-col>
+                            <ion-col size="3" class="ion-align-self-center">
+                              <ion-label class="ion-text-wrap">No</ion-label>
+                            </ion-col>
+                            <ion-col size="3">
+                              <ion-radio value="no" color="primary"></ion-radio>
+                            </ion-col>
+                          </ion-row>
+                        </ion-radio-group>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <!-- End of Pet Vaccine Information -->
+                <!-- Beginning of Feeding and Medication Information -->
+                <ion-col size="12">
+                  <h4>Pet {{ i+1 }} Feeding and Medication Info</h4>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item [formGroupName]="i">
+                    <div class="input-container">
+                        <div class="input">
+                          <ion-label class="ion-text-wrap" >Client will provide food? <span class="required-field">*</span></ion-label>
+                        </div>
+                        <div class="input">
+                          <ion-radio-group formControlName="petFood" required="true">
+                            <ion-row>
+                              <ion-col>
+                                <ion-label class="ion-text-wrap">Yes</ion-label>
+                                <ion-radio value="yes" color="primary"></ion-radio>
+                              </ion-col>
+                              <ion-col>
+                                <ion-label class="ion-text-wrap">No</ion-label>
+                                <ion-radio value="no" color="primary"></ion-radio>
+                              </ion-col>
+                            </ion-row>
+                          </ion-radio-group>
+                        </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item [formGroupName]="i">
+                    <div class="input-container">
+                        <div class="input">
+                          <ion-label class="ion-text-wrap" >Pet has medication?</ion-label>
+                        </div>
+                        <div class="input">
+                          <ion-radio-group formControlName="petMeds">
+                            <ion-row>
+                              <ion-col>
+                                <ion-label class="ion-text-wrap">Yes</ion-label>
+                                <ion-radio value="yes" color="primary"></ion-radio>
+                              </ion-col>
+                              <ion-col>
+                                <ion-label class="ion-text-wrap">No</ion-label>
+                                <ion-radio value="no" color="primary"></ion-radio>
+                              </ion-col>
+                            </ion-row>
+                          </ion-radio-group>
+                        </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none" [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Feeding Instructions <span class="required-field">*</span></ion-label>
+                        <ion-textarea formControlName="petFoodInfo" required="true"></ion-textarea>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="6">
+                  <ion-item lines="none" [formGroupName]="i">
+                    <div class="input-container">
+                      <div class="input">
+                        <ion-label position="floating">Medication Instructions <span class="required-field">*</span></ion-label>
+                        <ion-textarea formControlName="petMedInfo" required="true"></ion-textarea>
+                      </div>
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <!-- End of Feeding and Medication Information -->
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <!-- END OF PET INFORMATION SECTION -->
+
+          <ion-row>
+            <ion-col size="12" class="ion-text-center">
+              <h4>By Clicking Submit, you indicate that you have read POMH Policies</h4>
+            </ion-col>
+            <ion-col class="ion-text-center" size="12">
+              <ion-button class="submit" type="submit" strong="true" expand="block" shape="round" mode="ios" 
+              [disabled]="!enrollmentForm.valid">Submit</ion-button>
+              <ion-button fill="solid" color="secondary" shape="round" mode="ios" >Cancel</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
       </ion-col>
     </ion-row>
   </ion-grid>
