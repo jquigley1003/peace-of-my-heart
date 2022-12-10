@@ -49,8 +49,8 @@ export class PetService implements OnDestroy {
     return this.userPets$.asObservable();
   }
 
-  updatePet(pet) {
-    
+  updatePet(path, data) {
+    const docRef = doc
   }
 
   async stopSubscribing() {

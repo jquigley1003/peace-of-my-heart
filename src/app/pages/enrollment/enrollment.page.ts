@@ -216,8 +216,8 @@ export class EnrollmentPage implements OnInit, OnDestroy {
     // console.log('pet DOB is: ', this.petDobString);
   }
 
-  updatePet(pet) {
-    this.petService.updatePet(pet);
+  updatePet(path, data) {
+    this.petService.updatePet(path, data);
   }
 
   async presentPetModal(pet) {
